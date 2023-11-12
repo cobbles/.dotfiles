@@ -1,0 +1,10 @@
+- hosts: localhost
+  pre_tasks:
+    - name: Update apt cache
+      become: true
+      apt:
+        update_cache: yes
+  tasks:
+    - include: playbooks/ubuntu.yml
+    - include: playbooks/alacritty.yml
+    - include: playbooks/zsh.yml

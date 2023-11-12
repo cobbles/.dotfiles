@@ -1,0 +1,12 @@
+- name: Add alacritty PPA
+  become: true
+  apt_repository:
+    repo: ppa:aslatter/ppa
+  tags:
+    - alacritty
+- name: Install Alacritty
+  become: true
+  apt:
+    name: "alacritty"
+  tags:
+    - alacritty

@@ -1,0 +1,11 @@
+- name: Install Core ubuntu packages
+  become: true
+  apt:
+    name:
+      - software-properties-common
+      - curl
+      - git
+      - build-essential
+      - sudo
+  tags:
+    - ubuntu
