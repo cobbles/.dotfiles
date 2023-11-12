@@ -6,5 +6,7 @@
         update_cache: yes
   tasks:
     - include: playbooks/ubuntu.yml
+    - include: playbooks/ssh.yml
     - include: playbooks/alacritty.yml
     - include: playbooks/zsh.yml
+    - include: playbooks/intellihr.yml
