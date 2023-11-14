@@ -10,3 +10,10 @@
     name: "alacritty"
   tags:
     - alacritty
+- name: Clone alacritty dracula theme
+  git:
+    repo: https://github.com/dracula/alacritty
+    dest: ~/dracula-themes/alacritty
+  tags:
+    - dracula-theme
+    - zsh

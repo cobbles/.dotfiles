@@ -35,20 +35,18 @@
   shell: ~/.fzf/install
   tags:
     - zsh
-- name: Install dracula zsh theme
+- name: Clone zsh dracula theme
   git:
     repo: https://github.com/dracula/zsh.git
     dest: ~/.oh-my-zsh/themes/dracula
+    dest: ~/dracula-themes/zsh
   tags:
     - zsh
 - name: Create symlink for dracula theme
   file:
-    src: ~/.oh-my-zsh/themes/dracula/dracula.zsh-theme
+    src: ~/dracula-themes/zsh/dracula.zsh-theme
     dest: ~/.oh-my-zsh/themes/dracula.zsh-theme
     state: link
   tags:
-    - zsh
-- name: Move .zshrc to home dir
-  shell: mv ~/dotfiles/.zshrc ~/.zshrc
-  tags:
+    - dracula-theme
     - zsh

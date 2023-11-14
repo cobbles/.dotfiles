@@ -1,0 +1,30 @@
+- name: Installing stow
+  become: true
+  apt:
+    name:
+      - stow
+  tags:
+    - dotfiles
+- name: Check if {{ lookup('env', 'HOME') }}/ansible exists
+  stat:
+    path: "{{ lookup('env', 'HOME') }}/ansible"
+  register: ansible_repo_dir
+  tags:
+    - dotfiles
+- name: Cloning anisble repo
+  when: ansible_repo_dir.stat.exists == false
+  git:
+    repo: "git@github.com:cobbles/ansible.git"
+    dest: "{{ lookup('env', 'HOME') }}/ansible"
+    accept_newhostkey: true
+    clone: true
+  tags:
+    - dotfiles
+- name: Stow dotfiles
+  shell: |
+    cd {{ lookup('env', 'HOME') }}/ansible/.dotfiles
+    stow -d {{ lookup('env', 'HOME') }}/ansible/.dotfiles -t {{ lookup('env', 'HOME') }} alacritty zsh
+  tags:
+    - install
+    - dotfiles
+    - stow
