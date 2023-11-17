@@ -11,3 +11,5 @@
     - include: playbooks/dotfiles.yml
     - include: playbooks/alacritty.yml
     - include: playbooks/zsh.yml
+    - include: playbooks/docker.yml
+    - include: playbooks/firefox.yml

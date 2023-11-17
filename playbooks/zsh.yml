@@ -1,7 +1,7 @@
 - name: Install zsh packages
   become: true
   apt:
-    name: ["zsh", "fonts-powerline"]
+    name: ["zsh", "fonts-powerline", "tmux"]
   tags:
     - zsh
 - name: Change shell
@@ -10,7 +10,7 @@
   tags:
     - zsh
 - name: Install ohmyzsh
-  shell: curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | sh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
   tags:
     - zsh
 - name: Install zsh-autosuggestions
@@ -25,7 +25,7 @@
     dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   tags:
     - zsh
-- name: Clonse fzf
+- name: Clone fzf
   git:
     repo: https://github.com/junegunn/fzf.git
     dest: ~/.fzf
@@ -38,7 +38,6 @@
 - name: Clone zsh dracula theme
   git:
     repo: https://github.com/dracula/zsh.git
-    dest: ~/.oh-my-zsh/themes/dracula
     dest: ~/dracula-themes/zsh
   tags:
     - zsh

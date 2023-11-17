@@ -7,5 +7,6 @@
       - git
       - build-essential
       - sudo
+      - i3
   tags:
     - ubuntu
