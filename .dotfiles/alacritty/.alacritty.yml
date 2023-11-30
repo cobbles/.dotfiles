@@ -1,0 +1,3 @@
+shell: /bin/zsh
+import:
+  - ~/dracula-themes/alacritty/dracula.yml
