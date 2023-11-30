@@ -10,3 +10,9 @@
       - i3
   tags:
     - ubuntu
+
+- name: Remove Gnome Desktop Dock
+  apt:
+    pkg: gnome-shell-extension-ubuntu-dock
+    state: absent
+  become: true
