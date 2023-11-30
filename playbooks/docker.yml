@@ -32,6 +32,6 @@
 
 - name: Add to docker group
   become: true
-  shell: usermod -aG docker {{ lookup('env', 'USER') }} && su - {{ lookup('env', 'USER') }}
+  shell: usermod -aG docker {{ lookup('env', 'USER') }}
   tags:
     - docker
