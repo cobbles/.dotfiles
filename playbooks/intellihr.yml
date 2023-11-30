@@ -40,7 +40,7 @@
   become: true
   snap:
     name:
-      - zoom-client
+      - slack
   tags:
     - intellihr
 
