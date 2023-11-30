@@ -23,7 +23,7 @@
 - name: Stow dotfiles
   shell: |
     cd {{ lookup('env', 'HOME') }}/ansible/.dotfiles
-    stow -d {{ lookup('env', 'HOME') }}/ansible/.dotfiles -t {{ lookup('env', 'HOME') }} alacritty zsh firefox
+    stow -d {{ lookup('env', 'HOME') }}/ansible/.dotfiles -t {{ lookup('env', 'HOME') }} alacritty zsh
   tags:
     - install
     - dotfiles
