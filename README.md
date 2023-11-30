@@ -15,7 +15,8 @@ ansible-pull --ask-vault-pass -U https://github.com/cobbles/ansible.git
 ## Run playbook on the locally checked out repo
 
 ```shell
-
+git clone https://github.com/cobbles/ansible.git
+cd ansible
 ansible-playbook --ask-vault-pass --ask-become-user local.yml
 ```
 
