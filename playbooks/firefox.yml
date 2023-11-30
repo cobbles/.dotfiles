@@ -41,3 +41,17 @@
       - firefox
   tags:
     - firefox
+
+- name: Add Firefox personal Profile
+  copy:
+    src: config/firefox/personal
+    dest: "{{ lookup('env', 'HOME') }}/.mozilla/firefox"
+  tags:
+    - firefox
+
+- name: Enable Firefox Profile
+  copy:
+    src: config/firefox/profiles.ini
+    dest: "{{ lookup('env', 'HOME') }}/.mozilla/firefox/profiles.ini"
+  tags:
+    - firefox   

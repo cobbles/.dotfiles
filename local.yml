@@ -7,9 +7,9 @@
   tasks:
     - include: playbooks/ubuntu.yml
     - include: playbooks/ssh.yml
-    - include: playbooks/intellihr.yml
     - include: playbooks/dotfiles.yml
     - include: playbooks/alacritty.yml
     - include: playbooks/zsh.yml
     - include: playbooks/docker.yml
     - include: playbooks/firefox.yml
+    - include: playbooks/intellihr.yml

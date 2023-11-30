@@ -1,1 +1,2 @@
+shell = "/bin/zsh"
 import = ["~/dracula-themes/alacritty/dracula.toml"]
