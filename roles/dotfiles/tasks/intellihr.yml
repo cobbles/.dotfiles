@@ -1,0 +1,27 @@
+- name: ensure .ssh dir exists
+  file:
+    dest: ~/.ssh
+    mode: 0700
+    state: directory
+
+- name: install ssh private key
+  copy:
+    src: ssh/id_rsa_intellihr
+    dest: ~/.ssh/id_rsa_intellihr
+    mode: 0600
+
+- name: Install ssh key public
+  copy:
+    src: ssh/id_rsa_intellihr.pub
+    dest: ~/.ssh/id_rsa_intellihr.pub
+    mode: 0644
+
+- name: add firefox work profile
+  copy:
+    src: firefox/work
+    dest: ~/.mozilla/firefox
+
+- name: set firefox work profile as default
+  copy:
+    src: firefox/work-profiles.ini
+    dest: ~/.mozilla/firefox/profiles.ini

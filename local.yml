@@ -1,15 +1,14 @@
-- hosts: localhost
-  pre_tasks:
-    - name: Update apt cache
-      become: true
-      apt:
-        update_cache: yes
-  tasks:
-    - include: playbooks/ubuntu.yml
-    - include: playbooks/ssh.yml
-    - include: playbooks/dotfiles.yml
-    - include: playbooks/alacritty.yml
-    - include: playbooks/zsh.yml
-    - include: playbooks/docker.yml
-    - include: playbooks/firefox.yml
-    - include: playbooks/intellihr.yml
+- name: uninstall
+  hosts: localhost
+  roles:
+    - uninstall
+
+- name: install
+  hosts: localhost
+  roles:
+    - install
+
+- name: dotfiles
+  hosts: localhost
+  roles:
+    - dotfiles

@@ -1,0 +1,5 @@
+- name: stow
+  become: true
+  apt:
+    name:
+      - stow

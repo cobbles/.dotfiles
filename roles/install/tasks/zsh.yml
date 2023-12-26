@@ -1,0 +1,10 @@
+- name: install zsh
+  become: true
+  apt:
+    name:
+      - zsh
+      - fonts-powerline
+      - tmux
+
+- name: install ohmyzsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc

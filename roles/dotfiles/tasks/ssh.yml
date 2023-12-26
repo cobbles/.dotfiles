@@ -1,0 +1,17 @@
+- name: ensure .ssh dir exists
+  file:
+    dest: ~/.ssh
+    mode: 0700
+    state: directory
+
+- name: install ssh private key
+  copy:
+    src: ssh/id_rsa
+    dest: ~/.ssh/id_rsa
+    mode: 0600
+
+- name: install ssh public key
+  copy:
+    src: ssh/id_rsa.pub
+    dest: ~/.ssh/id_rsa.pub
+    mode: 0644

@@ -1,0 +1,15 @@
+---
+- name: apt facts
+  package_facts:
+    manager: auto
+  tags: always
+
+- name: snap
+  include_tasks:
+    file: snap.yml
+    apply:
+      tags:
+        - snap
+  tags:
+    - snap
+  when: "'snap' in ansible_facts.packages"

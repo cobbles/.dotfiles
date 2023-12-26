@@ -1,4 +1,4 @@
-- name: Install docker deps
+- name: install docker deps
   become: true
   apt:
     name:
@@ -6,32 +6,22 @@
       - ca-certificates
       - curl
       - software-properties-common
-  tags:
-    - docker
 
-- name: Add docker gpg key
+- name: add docker gpg key
   become: true
   shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-  tags:
-    - docker
 
-- name: Add docker PPA
+- name: add docker ppa
   become: true
   apt_repository:
     repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
-  tags:
-    - docker
 
-- name: Install docker
+- name: install docker
   become: true
   apt:
     name:
       - docker-ce
-  tags:
-    - docker
 
-- name: Add to docker group
+- name: add to docker group
   become: true
   shell: usermod -aG docker {{ lookup('env', 'USER') }}
-  tags:
-    - docker

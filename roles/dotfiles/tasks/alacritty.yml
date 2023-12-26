@@ -1,0 +1,9 @@
+- name: clone alacritty dracula theme
+  git:
+    repo: https://github.com/dracula/alacritty
+    dest: ~/dracula-themes/alacritty
+
+- name: stow alacritty
+  args:
+    chdir: "{{ role_path }}/files"
+  command: stow -t ~/ alacritty

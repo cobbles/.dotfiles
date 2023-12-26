@@ -1,0 +1,10 @@
+- name: add firefox ppa
+  become: true
+  apt_repository:
+    repo: ppa:mozillateam/ppa
+
+- name: firefox
+  become: true
+  apt:
+    name:
+      - firefox
