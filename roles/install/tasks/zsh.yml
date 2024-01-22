@@ -6,5 +6,11 @@
       - fonts-powerline
       - tmux
 
+- name: ohmyzsh exists
+  stat:
+    path: ~/.oh-my-zsh
+  register: ohmyzsh
+
 - name: install ohmyzsh
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+  when: not ohmyzsh.stat.exists
