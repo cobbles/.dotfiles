@@ -40,6 +40,15 @@
   tags:
     - firefox
 
+- name: intellihr
+  include_tasks:
+    file: intellihr.yml
+    apply:
+      tags:
+        - intellihr
+  tags:
+    - intellihr
+
 - name: zsh
   include_tasks:
     file: zsh.yml
@@ -48,3 +57,12 @@
         - zsh
   tags:
     - zsh
+
+- name: i3
+  include_tasks:
+    file: i3.yml
+    apply:
+      tags:
+        - i3
+  tags:
+    - i3

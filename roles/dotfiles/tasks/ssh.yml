@@ -4,13 +4,21 @@
     mode: 0700
     state: directory
 
+- name: Check if ~/.ssh/id_rsa exists
+  stat:
+    path: ~/ansible
+  register: dir
+  tags: always
+
 - name: install ssh private key
+  when: dir.stat.exists == false
   copy:
     src: ssh/id_rsa
     dest: ~/.ssh/id_rsa
     mode: 0600
 
 - name: install ssh public key
+  when: dir.stat.exists == false
   copy:
     src: ssh/id_rsa.pub
     dest: ~/.ssh/id_rsa.pub
