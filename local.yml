@@ -1,14 +1,14 @@
 - name: uninstall
-  hosts: localhost
+  hosts: all
   roles:
     - uninstall
 
 - name: install
-  hosts: localhost
+  hosts: all
   roles:
     - install
 
 - name: dotfiles
-  hosts: localhost
+  hosts: all
   roles:
     - dotfiles
