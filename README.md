@@ -17,7 +17,7 @@ ansible-pull --ask-become-pass --ask-vault-pass -U https://github.com/cobbles/.d
 ```shell
 git clone https://github.com/cobbles/.dotfiles.git
 cd .dotfiles
-ansible-playbook --ask-become-pass --ask-vault-pass --ask-become-user local.yml
+ansible-playbook --ask-become-pass local.yml
 ```
 
 ## Run playbook for a specific tag
