@@ -1,27 +1,27 @@
-# ansible
+# .dotfiles
 
-## Install ansible
+ansible script to set up my pc
+
+## Ubuntu
 
 ```shell
-curl fsSL https://raw.githubusercontent.com/cobbles/ansible/main/install | sh
+wget -O - https://raw.githubusercontent.com/cobbles/.dotfiles/main/ubuntu | sh
 ```
 
-## Run playbook from remote host
-
 ```shell
-ansible-pull --ask-vault-pass -U https://github.com/cobbles/ansible.git
+ansible-pull --ask-become-pass --ask-vault-pass -U https://github.com/cobbles/.dotfiles.git
 ```
 
 ## Run playbook on the locally checked out repo
 
 ```shell
-git clone https://github.com/cobbles/ansible.git
-cd ansible
-ansible-playbook --ask-vault-pass --ask-become-user local.yml
+git clone https://github.com/cobbles/.dotfiles.git
+cd .dotfiles
+ansible-playbook --ask-become-pass --ask-vault-pass --ask-become-user local.yml
 ```
 
 ## Run playbook for a specific tag
 
 ```shell
-ansible-playbook -t ssh --ask-vault-pass local.yml
+ansible-playbook -t ssh --ask-become-pass --ask-vault-pass local.yml
 ```
