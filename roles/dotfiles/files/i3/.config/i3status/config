@@ -4,7 +4,6 @@
 order += "cpu_temperature 0"
 order += "wireless wlp4s0"
 order += "ethernet enp3s0"
-order += "ipv6"
 order += "tztime local"
 
 general {
