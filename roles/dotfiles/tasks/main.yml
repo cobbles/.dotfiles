@@ -40,6 +40,15 @@
   tags:
     - firefox
 
+- name: gtk
+  include_tasks:
+    file: gtk.yml
+    apply:
+      tags:
+        - gtk
+  tags:
+    - gtk
+
 - name: intellihr
   include_tasks:
     file: intellihr.yml

@@ -1,0 +1,32 @@
+- name: clone gtk dracula theme
+  git:
+    repo: https://github.com/dracula/gtk
+    dest: ~/dracula-themes/gtk
+
+- name: download gtk icons
+  unarchive:
+    src: https://github.com/dracula/gtk/files/5214870/Dracula.zip
+    dest: ~/.icons
+    remote_src: yes
+
+- name: stow gtk theme
+  args:
+    chdir: ~/dracula-themes/
+  command: stow -t ~/.themes gtk
+
+- name: set gtk interface theme
+  dconf:
+    key: "gsettings set org.gnome.desktop.interface gtk-theme"
+    value: "Dracula"
+    state: present
+
+- name: set gtk wm theme
+  dconf:
+    key: "gsettings set org.gnome.desktop.wm.preferences theme"
+    value: "Dracula"
+    state: present
+
+- name: stow alacritty
+  args:
+    chdir: "{{ role_path }}/files"
+  command: stow -t ~/ alacritty
