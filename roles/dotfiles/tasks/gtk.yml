@@ -8,9 +8,9 @@
     dest: ~/.icons
     state: directory
 
-- name: ensure ~/.themes/gtk dir exists
+- name: ensure ~/.themes/Dracula dir exists
   file:
-    dest: ~/.themes/gtk
+    dest: ~/.themes/Dracula
     state: directory
 
 - name: download gtk icons
@@ -19,12 +19,12 @@
     dest: ~/.icons
     remote_src: yes
 
-- name: stow gtk theme
+- name: stow gtk dracula theme
   args:
     chdir: ~/dracula-themes/
-  command: stow -t ~/.themes/gtk gtk
+  command: stow -t ~/.themes/Dracula gtk
 
-- name: stow gtk
+- name: stow gtk config
   args:
     chdir: "{{ role_path }}/files"
   command: stow -t ~/ gtk
