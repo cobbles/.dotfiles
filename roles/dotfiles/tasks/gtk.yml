@@ -3,6 +3,11 @@
     repo: https://github.com/dracula/gtk
     dest: ~/dracula-themes/gtk
 
+- name: ensure .icons dir exists
+  file:
+    dest: ~/.icons
+    state: directory
+
 - name: download gtk icons
   unarchive:
     src: https://github.com/dracula/gtk/files/5214870/Dracula.zip
