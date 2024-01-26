@@ -12,21 +12,9 @@
 - name: stow gtk theme
   args:
     chdir: ~/dracula-themes/
-  command: stow -t ~/.themes gtk
+  command: stow -t ~/.themes/gtk gtk
 
-- name: set gtk interface theme
-  dconf:
-    key: "gsettings set org.gnome.desktop.interface gtk-theme"
-    value: "Dracula"
-    state: present
-
-- name: set gtk wm theme
-  dconf:
-    key: "gsettings set org.gnome.desktop.wm.preferences theme"
-    value: "Dracula"
-    state: present
-
-- name: stow alacritty
+- name: stow gtk
   args:
     chdir: "{{ role_path }}/files"
-  command: stow -t ~/ alacritty
+  command: stow -t ~/ gtk
