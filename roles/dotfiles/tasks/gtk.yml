@@ -8,6 +8,11 @@
     dest: ~/.icons
     state: directory
 
+- name: ensure ~/.themes/gtk dir exists
+  file:
+    dest: ~/.themes/gtk
+    state: directory
+
 - name: download gtk icons
   unarchive:
     src: https://github.com/dracula/gtk/files/5214870/Dracula.zip
