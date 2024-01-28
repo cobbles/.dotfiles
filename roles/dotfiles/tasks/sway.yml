@@ -8,6 +8,11 @@
     repo: https://github.com/dracula/rofi
     dest: ~/dracula-themes/rofi
 
+- name: clone waybar dracula theme
+  git:
+    repo: https://github.com/dracula/waybar
+    dest: ~/dracula-themes/waybar
+
 - name: stow sway
   args:
     chdir: "{{ role_path }}/files"
@@ -17,3 +22,8 @@
   args:
     chdir: "{{ role_path }}/files"
   command: stow -t ~/ rofi
+
+- name: stow waybar
+  args:
+    chdir: "{{ role_path }}/files"
+  command: stow -t ~/ waybar

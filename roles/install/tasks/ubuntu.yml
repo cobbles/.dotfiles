@@ -10,3 +10,5 @@
       - sway
       - swaylock
       - rofi
+      - waybar
+      - libappindicator-dev

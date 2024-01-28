@@ -1,0 +1,11 @@
+@import url("../../dracula-themes/waybar/waybar/colors.css");
+
+* {
+	min-height: 0;
+}
+
+window#waybar {
+    background: @background;
+    color: @purple;
+    font-size: 11px;
+}

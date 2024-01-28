@@ -1,0 +1,21 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 24,
+  "spacing": 4,
+  "modules-left": [
+    "sway/workspaces"
+  ],
+  "modules-center": [
+  ],
+  "modules-right": [
+    "tray",
+    "clock"
+  ],
+  "clock": {
+    "format": "{:%Y-%m-%d %I:%M %p}"
+  },
+  "tray": {
+    "spacing": 4
+  }
+}
