@@ -126,22 +126,22 @@ bindswitch --reload --locked lid:off output $laptopOutput enable
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: Slack"
-set $ws2 "2: Firefox (Personal)"
-set $ws3 "3"
-set $ws4 "4"
+set $ws2 "2: Firefox (Work)"
+set $ws3 "3: Code"
+set $ws4 "4: Terminal"
 set $ws5 "5"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+set $ws10 "10: Firefox (Personal)"
 
 # Default output for workspaces
 set $preferLeft $leftOutput $centerOutput $laptopOutput
 set $preferCenter $centerOutput $leftOutput $laptopOutput
 
 workspace $ws1 output $preferLeft
-workspace $ws2 output $preferLeft
+workspace $ws2 output $preferCenter
 workspace $ws3 output $preferCenter
 workspace $ws4 output $preferCenter
 workspace $ws5 output $preferCenter
@@ -149,7 +149,7 @@ workspace $ws6 output $preferCenter
 workspace $ws7 output $preferCenter
 workspace $ws8 output $preferCenter
 workspace $ws9 output $preferCenter
-workspace $ws10 output $preferCenter
+workspace $ws10 output $preferLeft
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
