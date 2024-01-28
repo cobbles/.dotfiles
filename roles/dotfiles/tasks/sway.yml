@@ -1,0 +1,19 @@
+- name: clone i3/sway dracula theme
+  git:
+    repo: https://github.com/dracula/i3.git
+    dest: ~/dracula-themes/i3
+
+- name: clone rofi dracula theme
+  git:
+    repo: https://github.com/dracula/rofi
+    dest: ~/dracula-themes/rofi
+
+- name: stow sway
+  args:
+    chdir: "{{ role_path }}/files"
+  command: stow -t ~/ sway
+
+- name: stow rofi
+  args:
+    chdir: "{{ role_path }}/files"
+  command: stow -t ~/ rofi

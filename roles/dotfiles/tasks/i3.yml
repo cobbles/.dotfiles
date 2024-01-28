@@ -1,9 +1,0 @@
-- name: clone i3 dracula theme
-  git:
-    repo: https://github.com/dracula/i3.git
-    dest: ~/dracula-themes/i3
-
-- name: stow zsh
-  args:
-    chdir: "{{ role_path }}/files"
-  command: stow -t ~/ i3

@@ -7,4 +7,6 @@
       - git
       - build-essential
       - sudo
-      - i3
+      - sway
+      - swaylock
+      - rofi
