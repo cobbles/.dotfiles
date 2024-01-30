@@ -8,3 +8,4 @@
       - build-essential
       - sudo
       - i3
+      - rofi
