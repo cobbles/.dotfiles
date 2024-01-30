@@ -12,3 +12,8 @@
   args:
     chdir: "{{ role_path }}/files"
   command: stow -t ~/ i3
+
+- name: stow rofi
+  args:
+    chdir: "{{ role_path }}/files"
+  command: stow -t ~/ rofi
