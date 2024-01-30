@@ -67,11 +67,11 @@
   tags:
     - zsh
 
-- name: sway
+- name: i3
   include_tasks:
-    file: sway.yml
+    file: i3.yml
     apply:
       tags:
-        - sway
+        - i3
   tags:
-    - sway
+    - i3
