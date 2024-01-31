@@ -8,6 +8,11 @@
     repo: https://github.com/dracula/rofi
     dest: ~/dracula-themes/rofi
 
+- name: stow autorandr
+  args:
+    chdir: "{{ role_path }}/files"
+  command: stow -t ~/ autorandr
+
 - name: stow i3
   args:
     chdir: "{{ role_path }}/files"

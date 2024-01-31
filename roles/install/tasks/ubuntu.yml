@@ -9,3 +9,4 @@
       - sudo
       - i3
       - rofi
+      - autorandr
