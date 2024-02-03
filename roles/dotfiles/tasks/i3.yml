@@ -8,6 +8,11 @@
     repo: https://github.com/dracula/rofi
     dest: ~/dracula-themes/rofi
 
+- name: clone i3lock-color dracula theme
+  git:
+    repo: https://github.com/dracula/i3lock-color
+    dest: ~/dracula-themes/i3lock-color
+
 - name: stow autorandr
   args:
     chdir: "{{ role_path }}/files"

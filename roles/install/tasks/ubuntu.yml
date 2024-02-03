@@ -10,3 +10,10 @@
       - i3
       - rofi
       - autorandr
+
+- name: download i3lock-color
+  become: true
+  get_url:
+    url: https://github.com/Raymo111/i3lock-color/releases/latest/download/i3lock
+    dest: /usr/local/bin/i3lock
+    mode: 777
