@@ -18,8 +18,7 @@ RUN echo 'tom ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 USER tom
 ENV USER=tom
 
-
 FROM tom
 WORKDIR /home/tom/ansible
 COPY --chown=tom . .
-CMD ["sh", "-c", "ansible-playbook local.yml"]
+CMD ["sh", "-c", "./ubuntu"]
