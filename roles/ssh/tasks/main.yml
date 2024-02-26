@@ -13,13 +13,13 @@
 - name: install ssh private key
   when: dir.stat.exists == false
   copy:
-    src: ssh/id_rsa
+    src: id_rsa
     dest: ~/.ssh/id_rsa
     mode: 0600
 
 - name: install ssh public key
   when: dir.stat.exists == false
   copy:
-    src: ssh/id_rsa.pub
+    src: id_rsa.pub
     dest: ~/.ssh/id_rsa.pub
     mode: 0644

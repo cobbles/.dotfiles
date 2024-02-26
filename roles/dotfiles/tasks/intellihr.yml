@@ -10,7 +10,7 @@
     dest: ~/.ssh/id_rsa_intellihr
     mode: 0600
 
-- name: Install ssh key public
+- name: install ssh key public
   copy:
     src: ssh/id_rsa_intellihr.pub
     dest: ~/.ssh/id_rsa_intellihr.pub

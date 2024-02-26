@@ -1,17 +1,19 @@
-- name: ssh
-  include_tasks:
-    file: ssh.yml
-    apply:
-      tags:
-        - always
-  tags:
-    - always
+- name: remove ~/.zshrc
+  file:
+    path: ~/.zshrc
+    state: absent
+
+- name: create symlink for dracula theme
+  file:
+    src: ~/dracula-themes/zsh/dracula.zsh-theme
+    dest: ~/.oh-my-zsh/themes/dracula.zsh-theme
+    state: link
+
 
 - name: Check if ~/ansible exists
   stat:
     path: ~/ansible
   register: dir
-  tags: always
 
 - name: clone anisble repo
   when: dir.stat.exists == false
@@ -20,16 +22,11 @@
     dest: ~/ansible
     accept_newhostkey: true
     clone: true
-  tags: always
 
-- name: alacritty
-  include_tasks:
-    file: alacritty.yml
-    apply:
-      tags:
-        - alacritty
-  tags:
-    - alacritty
+- name: stow
+  args:
+    chdir: "{{ role_path }}/files"
+  command: stow -t ~/ stow
 
 - name: firefox
   include_tasks:
@@ -39,15 +36,6 @@
         - firefox
   tags:
     - firefox
-
-- name: gtk
-  include_tasks:
-    file: gtk.yml
-    apply:
-      tags:
-        - gtk
-  tags:
-    - gtk
 
 - name: intellihr
   include_tasks:
