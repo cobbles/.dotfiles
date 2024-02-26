@@ -1,4 +1,30 @@
-- name: install core ubuntu packages
+---
+# Add keys
+
+- name: add docker gpg key
+  become: true
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+# Add PPA's
+
+- name: add alacritty ppa
+  become: true
+  apt_repository:
+    repo: ppa:aslatter/ppa
+
+- name: add firefox ppa
+  become: true
+  apt_repository:
+    repo: ppa:mozillateam/ppa
+
+- name: add docker ppa
+  become: true
+  apt_repository:
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+
+# Install Packages
+
+- name: install ubuntu packages
   become: true
   apt:
     name:
@@ -10,10 +36,20 @@
       - i3
       - rofi
       - autorandr
+      - alacritty
+      - firefox
+      - stow
+      - zsh
+      - fonts-powerline
+      - tmux
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+      - docker-ce
 
-- name: download i3lock-color
+
+
+- name: add to docker group
   become: true
-  get_url:
-    url: https://github.com/Raymo111/i3lock-color/releases/latest/download/i3lock
-    dest: /usr/local/bin/i3lock
-    mode: 777
+  shell: usermod -aG docker {{ lookup('env', 'USER') }}

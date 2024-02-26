@@ -2,79 +2,22 @@
 - name: ubuntu
   include_tasks:
     file: ubuntu.yml
-    apply:
-      tags:
-        - always
-  tags: always
+  when: ansible_distribution == 'Ubuntu'
 
-- name: alacritty
+- name: dracula
   include_tasks:
-    file: alacritty.yml
+    file: dracula.yml
     apply:
       tags:
-        - alacritty
+        - dracula
   tags:
-    - alacritty
+    - dracula
 
-- name: dbeaver
+- name: git-repos
   include_tasks:
-    file: dbeaver.yml
+    file: git-repos.yml
     apply:
       tags:
-        - dbeaver
+        - git-repos
   tags:
-    - dbeaver
-
-- name: docker
-  include_tasks:
-    file: docker.yml
-    apply:
-      tags:
-        - docker
-  tags:
-    - docker
-
-- name: stow
-  include_tasks:
-    file: stow.yml
-    apply:
-      tags:
-        - stow
-  tags:
-    - stow
-
-- name: firefox
-  include_tasks:
-    file: firefox.yml
-    apply:
-      tags:
-        - firefox
-  tags:
-    - firefox
-
-- name: nvm
-  include_tasks:
-    file: nvm.yml
-    apply:
-      tags:
-        - nvm
-  tags:
-    - nvm
-
-- name: zsh
-  include_tasks:
-    file: zsh.yml
-    apply:
-      tags:
-        - zsh
-  tags:
-    - zsh
-
-- name: tmux
-  include_tasks:
-    file: tmux.yml
-    apply:
-      tags:
-        - tmux
-  tags:
-    - tmux
+    - git-repos

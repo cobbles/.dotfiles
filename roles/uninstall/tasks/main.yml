@@ -7,9 +7,4 @@
 - name: snap
   include_tasks:
     file: snap.yml
-    apply:
-      tags:
-        - snap
-  tags:
-    - snap
-  when: "'snap' in ansible_facts.packages"
+  when: "ansible_distribution == 'Ubuntu' and 'snap' in ansible_facts.packages"

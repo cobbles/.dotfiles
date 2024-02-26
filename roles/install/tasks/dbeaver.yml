@@ -1,4 +1,0 @@
-- name: install dbeaver
-  become: true
-  apt:
-    deb: https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
