@@ -18,4 +18,11 @@
 - name: dotfiles
   hosts: localhost
   roles:
-    - dotfiles  
+    - dotfiles
+
+- name: intellihr
+  hosts: localhost
+  roles:
+    - intellihr
+  tags:
+    - intellihr

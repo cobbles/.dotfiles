@@ -37,15 +37,6 @@
   tags:
     - firefox
 
-- name: intellihr
-  include_tasks:
-    file: intellihr.yml
-    apply:
-      tags:
-        - intellihr
-  tags:
-    - intellihr
-
 - name: zsh
   include_tasks:
     file: zsh.yml
