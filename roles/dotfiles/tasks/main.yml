@@ -25,32 +25,5 @@
 
 - name: stow
   args:
-    chdir: "{{ role_path }}/files"
-  command: stow -t ~/ stow
-
-- name: firefox
-  include_tasks:
-    file: firefox.yml
-    apply:
-      tags:
-        - firefox
-  tags:
-    - firefox
-
-- name: zsh
-  include_tasks:
-    file: zsh.yml
-    apply:
-      tags:
-        - zsh
-  tags:
-    - zsh
-
-- name: i3
-  include_tasks:
-    file: i3.yml
-    apply:
-      tags:
-        - i3
-  tags:
-    - i3
+    chdir: "{{ role_path }}"
+  command: stow -t ~/ files
