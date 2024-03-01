@@ -12,5 +12,5 @@ jobs:
           context: .
           push: false
           tags: dotfiles-ubuntu:latest
-      - run: docker run dotfiles-ubuntu:latest
+      - run: docker run dotfiles-ubuntu:latest ./ubuntu -t install,dotfiles
      

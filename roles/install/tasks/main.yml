@@ -1,4 +1,13 @@
 ---
+- name: apt facts
+  package_facts:
+    manager: auto
+
+- name: remove snap
+  include_tasks:
+    file: remove-snap.yml
+  when: "ansible_distribution == 'Ubuntu' and 'snap' in ansible_facts.packages"
+
 - name: ubuntu
   include_tasks:
     file: ubuntu.yml
@@ -7,17 +16,7 @@
 - name: dracula
   include_tasks:
     file: dracula.yml
-    apply:
-      tags:
-        - dracula
-  tags:
-    - dracula
 
 - name: git-repos
   include_tasks:
     file: git-repos.yml
-    apply:
-      tags:
-        - git-repos
-  tags:
-    - git-repos

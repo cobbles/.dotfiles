@@ -5,19 +5,18 @@
   tags:
     - ssh
 
-- name: uninstall
-  hosts: localhost
-  roles:
-    - uninstall
-
 - name: install
   hosts: localhost
   roles:
+    - install
+  tags:
     - install
 
 - name: dotfiles
   hosts: localhost
   roles:
+    - dotfiles
+  tags:
     - dotfiles
 
 - name: intellihr

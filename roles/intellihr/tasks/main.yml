@@ -6,13 +6,14 @@
 
 - name: install ssh private key
   copy:
-    src: ssh/id_rsa_intellihr
+    decrpt: false
+    src: id_rsa_intellihr
     dest: ~/.ssh/id_rsa_intellihr
     mode: 0600
 
 - name: install ssh key public
   copy:
-    src: ssh/id_rsa_intellihr.pub
+    src: id_rsa_intellihr.pub
     dest: ~/.ssh/id_rsa_intellihr.pub
     mode: 0644
 

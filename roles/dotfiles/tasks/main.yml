@@ -9,20 +9,6 @@
     dest: ~/.oh-my-zsh/themes/dracula.zsh-theme
     state: link
 
-
-- name: Check if ~/ansible exists
-  stat:
-    path: ~/ansible
-  register: dir
-
-- name: clone anisble repo
-  when: dir.stat.exists == false
-  git:
-    repo: git@github.com:cobbles/ansible.git
-    dest: ~/ansible
-    accept_newhostkey: true
-    clone: true
-
 - name: stow
   args:
     chdir: "{{ role_path }}"

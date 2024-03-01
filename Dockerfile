@@ -19,6 +19,6 @@ USER tom
 ENV USER=tom
 
 FROM tom
-WORKDIR /home/tom/ansible
+WORKDIR /home/tom/.dotfiles
 COPY --chown=tom . .
 CMD ["sh", "-c", "./ubuntu"]

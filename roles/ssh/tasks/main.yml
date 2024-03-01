@@ -1,14 +1,13 @@
-- name: ensure .ssh dir exists
+- name: .ssh dir exists
   file:
     dest: ~/.ssh
     mode: 0700
     state: directory
 
-- name: Check if ~/.ssh/id_rsa exists
+- name: ~/.ssh/id_rsa exists
   stat:
-    path: ~/ansible
+    path: ~/.ssh/id_rsa
   register: dir
-  tags: always
 
 - name: install ssh private key
   when: dir.stat.exists == false
