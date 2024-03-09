@@ -9,7 +9,7 @@ jobs:
       - name: Docker Build
         uses: docker/build-push-action@v5
         with:
-          file: Dockerfile.Ubuntu 
+          file: Dockerfile.ubuntu 
           push: false
           tags: dotfiles-ubuntu:latest
       - run: docker run dotfiles-ubuntu:latest ./ubuntu -t install,dotfiles
