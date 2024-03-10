@@ -1,7 +1,7 @@
 [
   {
     "label": "Lock",
-    "exec": "nwg-lock",
+    "exec": "gtklock",
     "icon": "/usr/share/nwg-bar/images/system-lock-screen.svg"
   },
   {

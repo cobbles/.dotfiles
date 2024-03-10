@@ -40,7 +40,7 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec ~/.azotebg
+output * bg #282A36 solid_color
 
 ### Turn off screen on lid closed
 set $laptop eDP-1
@@ -70,7 +70,7 @@ bindsym Mod1+F1           exec $launcher
 bindsym $Mod+f            exec $filemanager
 bindsym $Mod+c            exec swaync-client -t
 bindsym Mod1+c            exec nwg-clipman
-bindsym Mod1+l            exec nwg-lock
+bindsym Mod1+l            exec gtklock
 bindsym $Mod+F1           exec nwg-shell-help
 
 # Exit menu

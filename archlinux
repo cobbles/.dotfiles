@@ -2,7 +2,7 @@
 
 archinstall --silent --config ./archinstall/user_configuration.json
 
-# git clone https://github.com/cobbles/.dotfiles.git ~/.dotfiles
-# cd ~/.dotfiles
+git clone https://github.com/cobbles/.dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
 
-# ansible-playbook $@ local.yml
+ansible-playbook $@ local.yml

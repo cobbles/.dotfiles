@@ -8,20 +8,10 @@
     repo: https://github.com/dracula/gtk
     dest: ~/.themes/Dracula
 
-- name: clone i3dracula theme
-  git:
-    repo: https://github.com/dracula/i3.git
-    dest: ~/dracula-themes/i3
-
 - name: clone rofi dracula theme
   git:
     repo: https://github.com/dracula/rofi
     dest: ~/dracula-themes/rofi
-
-- name: clone i3lock-color dracula theme
-  git:
-    repo: https://github.com/dracula/i3lock-color
-    dest: ~/dracula-themes/i3lock-color
 
 - name: clone zsh dracula theme
   git:

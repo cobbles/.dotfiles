@@ -149,17 +149,10 @@
     "ntp": true,
     "offline": false,
     "packages": [
-        "firefox",
         "git",
+        "base-devel",
         "alacritty",
-        "stow",
-        "docker",
-        "nvm",
-        "tmux",
-        "zsh",
-        "git",
-        "ansible",
-        "fzf"
+        "ansible"
     ],
     "parallel downloads": 0,
     "profile_config": {

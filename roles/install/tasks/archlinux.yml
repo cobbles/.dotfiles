@@ -1,0 +1,23 @@
+- name: clone yay
+  git:
+    repo: https://aur.archlinux.org/yay-bin.git
+    dest: ~/yay-bin
+
+- name: install yay
+  args:
+    chdir: ~/yay-bin
+  command: makepkg -si --noconfirm
+
+- name: install packages
+  command: yay -S --noconfirm --answerdiff=None --answeredit=None {{ item }} 
+  loop:
+     - nwg-shell
+     - rofi-lbonn-wayland
+     - nvm
+     - firefox
+     - stow
+     - docker
+     - nvm
+     - tmux
+     - fzf
+     - zsh

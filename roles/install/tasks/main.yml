@@ -13,6 +13,11 @@
     file: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
+- name: archlinux
+  include_tasks:
+    file: archlinux.yml
+  when: ansible_distribution == 'Archlinux'
+
 - name: dracula
   include_tasks:
     file: dracula.yml

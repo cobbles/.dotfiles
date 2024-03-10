@@ -53,7 +53,7 @@
         "items": [
           {
             "name": "Lock",
-            "cmd": "swaylock -f -c 000000"
+            "cmd": "gtklock"
           },
           {
             "name": "Logout",
