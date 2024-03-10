@@ -2,7 +2,11 @@ FROM archlinux:latest
 
 RUN pacman-key --init
 RUN pacman -Syu --noconfirm
-RUN pacman -S --noconfirm archinstall
+RUN pacman -S --noconfirm archinstall \
+    git \
+    base-devel \
+    alacritty \
+    ansible
 
 WORKDIR /usr/local/files
 
