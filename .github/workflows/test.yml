@@ -1,4 +1,4 @@
-test: ubuntu
+name: test
 on: [push]
 jobs:
   ubuntu:
@@ -12,7 +12,7 @@ jobs:
           file: Dockerfile.ubuntu 
           push: false
           tags: dotfiles-ubuntu:latest
-      - run: docker run dotfiles-ubuntu:latest ansible-playbook -t install,dotfiles local.yml
+      - run: docker run dotfiles-ubuntu:latest
   archlinux:
     runs-on: ubuntu-22.04
     steps:
@@ -24,4 +24,4 @@ jobs:
           file: Dockerfile.archlinux 
           push: false
           tags: dotfiles-archlinux:latest
-      - run: docker run dotfiles-archlinux:latest ansible-playbook -t install,dotfiles local.yml
+      - run: docker run dotfiles-archlinux:latest

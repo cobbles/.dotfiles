@@ -21,4 +21,5 @@ ENV USER=tom
 FROM tom
 WORKDIR /home/tom/.dotfiles
 COPY --chown=tom . .
-CMD ["sh", "-c", "./ubuntu"]
+
+CMD ["ansible-playbook -t install,dotfiles local.yml"]

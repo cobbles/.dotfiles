@@ -1,4 +1,4 @@
-FROM archlinux:latest
+FROM archlinux:latest as base
 
 RUN pacman-key --init
 RUN pacman -Syu --noconfirm
@@ -10,6 +10,16 @@ RUN pacman -S --noconfirm archinstall \
 
 WORKDIR /usr/local/files
 
-COPY . .
+FROM base AS tom
+ARG TAGS
+RUN addgroup --gid 1000 tom
+RUN adduser --gecos tom --uid 1000 --gid 1000 --disabled-password tom
+RUN echo 'tom ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+USER tom
+ENV USER=tom
 
-CMD ["sh", "-c", "./archlinux"]
+FROM tom
+WORKDIR /home/tom/.dotfiles
+COPY --chown=tom . .
+
+CMD ["ansible-playbook -t install,dotfiles local.yml"]
