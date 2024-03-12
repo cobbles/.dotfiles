@@ -1,7 +1,7 @@
 FROM archlinux:latest as base
 
 RUN pacman-key --init
-RUN pacman -Syu --noconfirm
+RUN pacman -Sy --noconfirm
 RUN pacman -S --noconfirm archinstall \
     git \
     base-devel \
@@ -12,14 +12,15 @@ WORKDIR /usr/local/files
 
 FROM base AS tom
 ARG TAGS
-RUN addgroup --gid 1000 tom
-RUN adduser --gecos tom --uid 1000 --gid 1000 --disabled-password tom
+RUN groupadd --gid 1000 tom
+RUN useradd --uid 1000 --gid 1000 tom
 RUN echo 'tom ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
-USER tom
-ENV USER=tom
 
 FROM tom
 WORKDIR /home/tom/.dotfiles
+RUN chown tom /home/tom
 COPY --chown=tom . .
+USER tom
+ENV USER=tom
 
-CMD ["ansible-playbook -t install,dotfiles local.yml"]
+CMD ["ansible-playbook", "-t install,dotfiles", "local.yml"]

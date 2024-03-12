@@ -1,34 +1,36 @@
 [
   {
-    "name": "panel-top",
+    "name": "panel-bottom",
     "output": "",
     "layer": "bottom",
-    "position": "top",
+    "position": "bottom",
     "controls": "right",
     "width": "auto",
     "height": 30,
-    "homogeneous": true,
     "margin-top": 0,
     "margin-bottom": 0,
-    "padding-horizontal": 0,
+    "padding-horizontal": 6,
     "padding-vertical": 0,
     "spacing": 0,
     "items-padding": 0,
-    "icons": "light",
-    "css-name": "panel-top",
-    "modules-left": [],
+    "icons": "",
+    "css-name": "panel-bottom",
+    "modules-left": [
+      "sway-workspaces"
+    ],
     "modules-center": [
       "clock"
     ],
     "modules-right": [
+      "executor-cpuav",
+      "executor-memory",
       "tray"
     ],
     "controls-settings": {
       "components": [
         "brightness",
         "volume",
-        "battery",
-        "processes"
+        "battery"
       ],
       "commands": {
         "battery": ""
@@ -40,13 +42,7 @@
       "leave-closes": true,
       "click-closes": false,
       "css-name": "controls-window",
-      "custom-items": [
-        {
-          "name": "Panel settings",
-          "icon": "nwg-panel",
-          "cmd": "nwg-panel-config"
-        }
-      ],
+      "custom-items": [],
       "menu": {
         "name": "Exit",
         "icon": "system-shutdown-symbolic",
@@ -72,7 +68,7 @@
       "show-brightness": true,
       "show-volume": true,
       "show-battery": true,
-      "output-switcher": true,
+      "output-switcher": false,
       "per-app-volume": false,
       "backlight-controller": "brightnessctl",
       "backlight-device": "",
@@ -80,170 +76,11 @@
       "window-margin-horizontal": 0,
       "window-margin-vertical": 0,
       "root-css-name": "controls-overview",
-      "battery-low-level": 20,
+      "battery-low-level": 5,
       "battery-low-interval": 3,
       "processes-label": "Processes",
       "readme-label": "README",
       "angle": 0.0
-    },
-    "tray": {
-      "root-css-name": "tray",
-      "inner-css-name": "inner-tray"
-    },
-    "sway-taskbar": {
-      "workspace-menu": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8"
-      ],
-      "name-max-len": 20,
-      "image-size": 16,
-      "workspaces-spacing": 0,
-      "task-padding": 0,
-      "show-app-icon": true,
-      "show-app-name": true,
-      "show-layout": true,
-      "workspace-buttons": false,
-      "all-workspaces": true,
-      "mark-autotiling": true,
-      "mark-xwayland": true,
-      "all-outputs": true
-    },
-    "sway-workspaces": {
-      "numbers": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8"
-      ]
-    },
-    "clock": {
-      "format": "%a  %d. %b  %I:%M %p",
-      "tooltip-text": "",
-      "on-left-click": "",
-      "on-middle-click": "",
-      "on-right-click": "",
-      "on-scroll-up": "",
-      "on-scroll-down": "",
-      "css-name": "clock",
-      "interval": 1,
-      "tooltip-date-format": false,
-      "root-css-name": "root-clock",
-      "angle": 0.0,
-      "calendar-path": "",
-      "calendar-css-name": "calendar-window",
-      "calendar-placement": "top",
-      "calendar-margin-horizontal": 0,
-      "calendar-margin-vertical": 0,
-      "calendar-icon-size": 24,
-      "calendar-interval": 60,
-      "calendar-on": true
-    },
-    "playerctl": {
-      "buttons-position": "left",
-      "icon-size": 16,
-      "chars": 30,
-      "scroll": false,
-      "button-css-name": "",
-      "label-css-name": "",
-      "interval": 1
-    },
-    "button-sample": {
-      "command": "notify-send 'sample button'",
-      "icon": "view-grid",
-      "label": "",
-      "label-position": "right",
-      "css-name": "button-custom",
-      "icon-size": 16
-    },
-    "menu-start": "off",
-    "exclusive-zone": true,
-    "sigrt": 64,
-    "use-sigrt": false,
-    "scratchpad": {},
-    "sway-mode": {},
-    "openweather": {},
-    "brightness-slider": {},
-    "dwl-tags": {},
-    "hyprland-taskbar": {},
-    "hyprland-workspaces": {},
-    "start-hidden": false,
-    "swaync": {
-      "tooltip-text": "Notifications",
-      "on-left-click": "swaync-client -t",
-      "on-middle-click": "",
-      "on-right-click": "",
-      "on-scroll-up": "",
-      "on-scroll-down": "",
-      "root-css-name": "root-executor",
-      "css-name": "executor",
-      "icon-placement": "left",
-      "icon-size": 18,
-      "interval": 1,
-      "always-show-icon": true
-    }
-  },
-  {
-    "name": "panel-bottom",
-    "output": "",
-    "layer": "bottom",
-    "position": "bottom",
-    "controls": "off",
-    "width": "auto",
-    "height": 30,
-    "margin-top": 0,
-    "margin-bottom": 0,
-    "padding-horizontal": 6,
-    "padding-vertical": 0,
-    "spacing": 0,
-    "items-padding": 0,
-    "icons": "",
-    "css-name": "panel-bottom",
-    "modules-left": [
-      "sway-workspaces"
-    ],
-    "modules-center": [],
-    "modules-right": [
-      "executor-cpuav",
-      "executor-memory"
-    ],
-    "controls-settings": {
-      "components": [
-        "brightness",
-        "volume",
-        "battery"
-      ],
-      "commands": {
-        "battery": ""
-      },
-      "show-values": false,
-      "interval": 1,
-      "icon-size": 16,
-      "hover-opens": false,
-      "leave-closes": true,
-      "click-closes": false,
-      "css-name": "controls-window",
-      "custom-items": [
-        {
-          "name": "Panel settings",
-          "icon": "nwg-panel",
-          "cmd": "nwg-panel-config"
-        }
-      ],
-      "menu": {
-        "name": "unnamed",
-        "icon": "",
-        "items": []
-      }
     },
     "sway-taskbar": {
       "workspace-menu": [
@@ -303,7 +140,7 @@
       "angle": 0.0
     },
     "clock": {
-      "format": "%a, %d. %b  %H:%M:%S",
+      "format": "%a, %d. %b  %H:%M %p",
       "tooltip-text": "",
       "on-left-click": "",
       "on-middle-click": "",
@@ -311,7 +148,18 @@
       "on-scroll-up": "",
       "on-scroll-down": "",
       "css-name": "clock",
-      "interval": 1
+      "interval": 1,
+      "tooltip-date-format": false,
+      "root-css-name": "root-clock",
+      "angle": 0.0,
+      "calendar-path": "",
+      "calendar-css-name": "calendar-window",
+      "calendar-placement": "bottom",
+      "calendar-margin-horizontal": 0,
+      "calendar-margin-vertical": 0,
+      "calendar-icon-size": 24,
+      "calendar-interval": 60,
+      "calendar-on": true
     },
     "playerctl": {
       "buttons-position": "left",
@@ -348,7 +196,12 @@
     "dwl-tags": {},
     "hyprland-taskbar": {},
     "hyprland-workspaces": {},
-    "tray": {},
+    "tray": {
+      "icon-size": 16,
+      "root-css-name": "tray",
+      "inner-css-name": "inner-tray",
+      "smooth-scrolling-threshold": 0
+    },
     "executor-cpuav": {
       "script": "gopsuinfo -i a",
       "interval": 2,
@@ -374,6 +227,24 @@
       "css-name": "",
       "icon-size": 16,
       "icon-placement": "left"
+    },
+    "menu-start-settings": {
+      "cmd-lock": "swaylock -f -c 000000",
+      "cmd-logout": "swaymsg exit",
+      "cmd-restart": "systemctl reboot",
+      "cmd-shutdown": "systemctl -i poweroff",
+      "autohide": true,
+      "file-manager": "thunar",
+      "icon-size-large": 32,
+      "icon-size-small": 16,
+      "icon-size-button": 16,
+      "margin-bottom": 0,
+      "margin-left": 0,
+      "margin-right": 0,
+      "margin-top": 0,
+      "padding": 2,
+      "terminal": "foot",
+      "run-through-compositor": true
     }
   }
 ]
