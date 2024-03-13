@@ -18,10 +18,9 @@
     "modules-left": [
       "sway-workspaces"
     ],
-    "modules-center": [
-      "clock"
-    ],
+    "modules-center": [],
     "modules-right": [
+      "clock",
       "executor-cpuav",
       "executor-memory",
       "tray"
@@ -140,7 +139,7 @@
       "angle": 0.0
     },
     "clock": {
-      "format": "%a, %d. %b  %H:%M %p",
+      "format": "%Y-%m-%d  %H:%M %p",
       "tooltip-text": "",
       "on-left-click": "",
       "on-middle-click": "",
@@ -154,7 +153,7 @@
       "angle": 0.0,
       "calendar-path": "",
       "calendar-css-name": "calendar-window",
-      "calendar-placement": "bottom",
+      "calendar-placement": "bottom-right",
       "calendar-margin-horizontal": 0,
       "calendar-margin-vertical": 0,
       "calendar-icon-size": 24,
@@ -206,27 +205,35 @@
       "script": "gopsuinfo -i a",
       "interval": 2,
       "tooltip-text": "CPU average load",
-      "on-left-click": "foot -e htop",
+      "on-left-click": "alacritty -e htop",
       "on-middle-click": "",
       "on-right-click": "",
       "on-scroll-up": "",
       "on-scroll-down": "",
       "css-name": "",
       "icon-size": 16,
-      "icon-placement": "right"
+      "icon-placement": "left",
+      "root-css-name": "",
+      "angle": 0.0,
+      "sigrt": 34,
+      "use-sigrt": false
     },
     "executor-memory": {
       "script": "gopsuinfo -i m",
       "interval": 5,
       "tooltip-text": "",
-      "on-left-click": "",
+      "on-left-click": "alacritty -e htop",
       "on-middle-click": "",
       "on-right-click": "",
       "on-scroll-up": "",
       "on-scroll-down": "",
       "css-name": "",
       "icon-size": 16,
-      "icon-placement": "left"
+      "icon-placement": "left",
+      "root-css-name": "",
+      "angle": 0.0,
+      "sigrt": 34,
+      "use-sigrt": false
     },
     "menu-start-settings": {
       "cmd-lock": "swaylock -f -c 000000",
@@ -245,6 +252,20 @@
       "padding": 2,
       "terminal": "foot",
       "run-through-compositor": true
+    },
+    "swaync": {
+      "tooltip-text": "Notifications",
+      "on-left-click": "swaync-client -t",
+      "on-middle-click": "",
+      "on-right-click": "",
+      "on-scroll-up": "",
+      "on-scroll-down": "",
+      "root-css-name": "root-executor",
+      "css-name": "executor",
+      "icon-placement": "left",
+      "icon-size": 18,
+      "interval": 1,
+      "always-show-icon": true
     }
   }
 ]

@@ -56,7 +56,7 @@
   "launcher-output": "Any",
   "dock-layer": "overlay",
   "dock-startup-delay": 0,
-  "swaync-mpris": false,
+  "swaync-mpris": true,
   "powerbar-on": false,
   "pb-size": 48
 }
