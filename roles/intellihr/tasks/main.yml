@@ -6,7 +6,6 @@
 
 - name: install ssh private key
   copy:
-    decrpt: false
     src: id_rsa_intellihr
     dest: ~/.ssh/id_rsa_intellihr
     mode: 0600

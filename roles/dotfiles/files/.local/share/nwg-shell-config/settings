@@ -59,7 +59,7 @@
   "touchpad-middle-emulation": "enabled",
   "touchpad-custom-name": "",
   "touchpad-custom-value": "",
-  "lockscreen-use-settings": true,
+  "lockscreen-use-settings": false,
   "lockscreen-locker": "gtklock",
   "lockscreen-background-source": "local",
   "lockscreen-custom-cmd": "",
@@ -71,10 +71,8 @@
   "before-sleep": "",
   "backgrounds-custom-path": "",
   "backgrounds-use-custom-path": false,
-  "background-dirs": [
-    "/usr/share/backgrounds/nwg-shell"
-  ],
-  "background-dirs-once-set": false,
+  "background-dirs": [],
+  "background-dirs-once-set": true,
   "unsplash-width": 1920,
   "unsplash-height": 1080,
   "unsplash-keywords": [
@@ -104,5 +102,6 @@
   },
   "autotiling-output-splitheights": {
     "eDP-1": 1.0
-  }
+  },
+  "after-resume": "swaymsg \"output * enable\""
 }

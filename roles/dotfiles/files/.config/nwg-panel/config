@@ -1,7 +1,7 @@
 [
   {
     "name": "panel-bottom",
-    "output": "",
+    "output": "All",
     "layer": "bottom",
     "position": "bottom",
     "controls": "right",
@@ -9,27 +9,28 @@
     "height": 30,
     "margin-top": 0,
     "margin-bottom": 0,
-    "padding-horizontal": 6,
+    "padding-horizontal": 0,
     "padding-vertical": 0,
     "spacing": 0,
     "items-padding": 0,
     "icons": "",
     "css-name": "panel-bottom",
     "modules-left": [
-      "sway-workspaces"
+      "sway-taskbar"
     ],
-    "modules-center": [],
+    "modules-center": [
+      "clock"
+    ],
     "modules-right": [
-      "clock",
       "executor-cpuav",
       "executor-memory",
       "tray"
     ],
     "controls-settings": {
       "components": [
-        "brightness",
         "volume",
-        "battery"
+        "battery",
+        "brightness"
       ],
       "commands": {
         "battery": ""
@@ -64,9 +65,9 @@
           }
         ]
       },
-      "show-brightness": true,
-      "show-volume": true,
-      "show-battery": true,
+      "show-brightness": false,
+      "show-volume": false,
+      "show-battery": false,
       "output-switcher": false,
       "per-app-volume": false,
       "backlight-controller": "brightnessctl",
@@ -96,13 +97,13 @@
       "image-size": 16,
       "workspaces-spacing": 0,
       "task-padding": 0,
-      "show-app-icon": false,
+      "show-app-icon": true,
       "show-app-name": false,
       "show-layout": false,
       "workspace-buttons": false,
       "all-workspaces": true,
       "mark-autotiling": true,
-      "mark-xwayland": false,
+      "mark-xwayland": true,
       "all-outputs": false,
       "angle": 0.0
     },
@@ -127,7 +128,16 @@
         "7",
         "8"
       ],
-      "focused-labels": [],
+      "focused-labels": [
+        "1. Slack",
+        "2. Firefox",
+        "3. Code",
+        "4. Terminal",
+        "5. Zoom",
+        "6. ",
+        "7",
+        "8"
+      ],
       "show-icon": true,
       "image-size": 16,
       "show-name": false,
@@ -139,7 +149,7 @@
       "angle": 0.0
     },
     "clock": {
-      "format": "%Y-%m-%d  %H:%M %p",
+      "format": "%Y-%m-%d  %I:%M %p",
       "tooltip-text": "",
       "on-left-click": "",
       "on-middle-click": "",
@@ -153,7 +163,7 @@
       "angle": 0.0,
       "calendar-path": "",
       "calendar-css-name": "calendar-window",
-      "calendar-placement": "bottom-right",
+      "calendar-placement": "bottom",
       "calendar-margin-horizontal": 0,
       "calendar-margin-vertical": 0,
       "calendar-icon-size": 24,

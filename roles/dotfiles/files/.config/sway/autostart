@@ -6,4 +6,3 @@ exec wl-paste --type image --watch cliphist store
 exec_always nwg-autotiling
 exec_always nwg-panel
 exec_always nwg-shell-check-updates
-exec swayidle timeout 1200 nwg-lock timeout 1800 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' 

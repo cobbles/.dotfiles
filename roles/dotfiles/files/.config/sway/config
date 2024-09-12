@@ -28,15 +28,18 @@ font pango:monospace 11
 # Mod4 = Super
 set $Mod Mod4
 
+# focus
+focus_follows_mouse no
+
 # direction keys
 set $up l
 set $down k
 set $left j
 set $right semicolon
 
-###############     Autostart      ##################
+###############     Autostart      ###############
 
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP XDG_SESSION_TYPE
 exec hash dbus-update-activation-environment 2>/dev/null && \
     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -65,7 +68,6 @@ bindsym $Mod+s            exec nwg-shell-config
 bindsym $Mod+d            exec rofi -show drun
 bindsym $Mod+e            exec $editor
 bindsym $Mod+w            exec $browser
-bindsym Control+space     exec $launcher
 bindsym Mod1+F1           exec $launcher
 bindsym $Mod+f            exec $filemanager
 bindsym $Mod+c            exec swaync-client -t
@@ -80,10 +82,7 @@ bindsym $Mod+x exec $exit
 bindsym $Mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
 # screenshot
-bindsym Print exec screenshot fullscreen
-bindsym Control+Print exec screenshot display
-bindsym Shift+Control+Print exec screenshot swappy
-bindsym $Mod+Shift+Control+Print exec screenshot focused
+bindsym Print exec screenshot swappy
 
 # audio
 bindsym XF86AudioPlay exec playerctl play-pause

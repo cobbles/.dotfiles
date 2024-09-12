@@ -3,4 +3,3 @@ set $browser MOZ_ENABLE_WAYLAND=1 firefox
 set $filemanager nautilus
 set $editor vim
 set $exit nwg-bar -p center -a middle -i 48
-set $dock nwg-dock -p bottom -l overlay -a center -i 48 -hd 20

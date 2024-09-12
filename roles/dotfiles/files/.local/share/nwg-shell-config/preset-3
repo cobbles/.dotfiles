@@ -56,5 +56,6 @@
   "pb-size": 48,
   "launcher-run-through-compositor": false,
   "launcher-output": "Any",
-  "dock-startup-delay": 0
+  "dock-startup-delay": 0,
+  "pb-icon-theme": false
 }

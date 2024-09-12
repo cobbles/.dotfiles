@@ -27,7 +27,7 @@
   "dock-icon-size": 48,
   "dock-hotspot-delay": 20,
   "dock-css": "",
-  "dock-on": true,
+  "dock-on": false,
   "swaync-positionX": "right",
   "swaync-positionY": "bottom",
   "swaync-control-center-width": 500,
@@ -48,7 +48,7 @@
   "gtklock-playerctl-art-size": 64,
   "gtklock-playerctl-position": "top-right",
   "gtklock-playerctl-show-hidden": true,
-  "launcher-gtk-theme": "Adwaita-dark",
+  "launcher-gtk-theme": "Dracula",
   "launcher-gtk-icon-theme": "Adwaita",
   "launcher-force-theme": false,
   "launcher-run-through-compositor": false,
@@ -58,5 +58,6 @@
   "dock-startup-delay": 0,
   "swaync-mpris": true,
   "powerbar-on": false,
-  "pb-size": 48
+  "pb-size": 48,
+  "pb-icon-theme": false
 }
