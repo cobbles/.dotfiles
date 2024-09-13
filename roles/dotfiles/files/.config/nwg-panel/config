@@ -67,7 +67,7 @@
       },
       "show-brightness": false,
       "show-volume": false,
-      "show-battery": false,
+      "show-battery": true,
       "output-switcher": false,
       "per-app-volume": false,
       "backlight-controller": "brightnessctl",
@@ -276,6 +276,7 @@
       "icon-size": 18,
       "interval": 1,
       "always-show-icon": true
-    }
+    },
+    "keyboard-layout": {}
   }
 ]

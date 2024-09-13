@@ -13,11 +13,14 @@
   loop:
      - nwg-shell
      - rofi-lbonn-wayland
-     - nvm
      - firefox
      - stow
      - docker
-     - nvm
+     - docker-compose
      - tmux
      - fzf
      - zsh
+     - xdg-desktop-portal-wlr
+     - bluez
+     - bluez-utils
+     - blueman
