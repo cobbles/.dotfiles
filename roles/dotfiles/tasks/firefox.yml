@@ -1,9 +1,0 @@
-- name: add firefox personal profile
-  copy:
-    src: firefox/personal
-    dest: ~/.mozilla/firefox
-
-- name: enable firefox profile
-  copy:
-    src: firefox/profiles.ini
-    dest: ~/.mozilla/firefox/profiles.ini

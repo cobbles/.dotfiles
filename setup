@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+# Dracula Theme Ansi256 colors
+background="\e[38;5;59m"
+currentLine="\e[38;5;60m"
+foreground="\e[38;5;231m"
+comment="\e[38;5;103m"
+cyan="\e[38;5;159m"
+green="\e[38;5;120m"
+orange="\e[38;5;222m"
+pink="\e[38;5;212m"
+purple="\e[38;5;183m" 
+red="\e[38;5;210m"
+yellow="\e[38;5;229m"
+reset="\e[0m"
+
+currDir=$PWD
+
+function generate_ssh_key() {
+    file=~/.ssh/id_rsa
+    
+    echo -e "🔐 ${purple}Generating new ssh key...${reset}"
+    [ -f $file ] && echo -e "${green}   $file already exists... skipping.${reset}" && return 
+
+    ssh-keygen -t ed25519 -N "" -f $file 
+}
+
+function install_yay() {
+    dir=~/yay-bin
+    
+    echo -e "📦 ${purple}Installing yay...${reset}"
+    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return 
+
+    pacman -S --needed git base-devel
+    git clone https://aur.archlinux.org/yay-bin.git $dir
+    cd $dir
+    makepkg -si
+    cd $currDir
+}
+
+function install_aur_packages() {
+    echo -e "📦 ${purple}Installing aur packages...${reset}"
+    
+    cat aur_packages | xargs yay -S --noconfirm --answerdiff=None --answeredit=None
+}
+
+function install_dracula_themes() {
+    repo=https://github.com/dracula
+    dir=~/dracula-themes
+    themes="alacritty gtk rofi zsh"
+    
+    echo -e "🧛 ${purple}Installing dracula themes...${reset}"
+
+    for theme in $themes
+    do
+        [ -d $dir/$theme ] && echo -e "${green}   $dir/$theme already exists... skipping.${reset}" && continue
+        git clone $repo/$theme $dir/$theme
+    done
+
+    ln -s -f ~/dracula-themes/gtk ~/.themes/Dracula
+}
+
+function install_ohmyzsh() {
+    dir=~/.oh-my-zsh
+    
+    echo -e "💻 ${purple}Installing ohmyzsh...${reset}"
+    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return 
+
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
+
+    ln -s -f ~/dracula-themes/zsh/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme
+
+    rm ~/.zshrc # remove this as we setup our own via stow
+}
+
+function install_ohmyzsh_plugins() {
+    repo=https://github.com/zsh-users
+    dir=~/.oh-my-zsh/custom/plugins
+    plugins="zsh-autosuggestions zsh-syntax-highlighting"
+
+    echo -e "💻 ${purple}Installing dracula ohmyzsh plugins...${reset}"
+    
+    for plugin in $plugins
+    do
+        [ -d $dir/$plugin ] && echo -e "${green}   $dir/$plugin already exists... skipping.${reset}" && continue
+        git clone $repo/$plugin $dir/$plugin
+    done
+}
+
+function stow_dotfiles() {
+    echo -e "📁 ${purple}Running stow on dotfiles...${reset}"
+    stow -t ~/ files
+}
+
+generate_ssh_key
+install_yay
+install_aur_packages
+install_dracula_themes
+install_ohmyzsh
+install_ohmyzsh_plugins
+stow_dotfiles

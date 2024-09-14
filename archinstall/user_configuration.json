@@ -151,8 +151,7 @@
     "packages": [
         "git",
         "base-devel",
-        "alacritty",
-        "ansible"
+        "alacritty"
     ],
     "parallel downloads": 0,
     "profile_config": {
