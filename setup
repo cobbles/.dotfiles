@@ -47,14 +47,21 @@ function install_aur_packages() {
 function install_dracula_themes() {
     repo=https://github.com/dracula
     dir=~/dracula-themes
-    themes="alacritty gtk rofi zsh"
+    themes="alacritty gtk rofi zsh gdm"
     
     echo -e "🧛 ${purple}Installing dracula themes...${reset}"
 
     for theme in $themes
     do
         [ -d $dir/$theme ] && echo -e "${green}   $dir/$theme already exists... skipping.${reset}" && continue
+        if [[ $theme -eq "gdm" ]]
+        then
+            git clone https://github.com/elbouillon/DraculaGDM $dir/$theme
+            sudo cp -f ~/dracula-themes/gdm/gnome-shell-theme.gresource /usr/share/gnome-shell/gnome-shell-theme.gresource
+        fi
+
         git clone $repo/$theme $dir/$theme
+
     done
 
     ln -s -f ~/dracula-themes/gtk ~/.themes/Dracula
