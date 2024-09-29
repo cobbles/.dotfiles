@@ -94,6 +94,16 @@ function install_ohmyzsh_plugins() {
     done
 }
 
+function install_tmux_plugin_manager() {
+    repo=https://github.com/tmux-plugins/tpm
+    dir=~/.tmux/plugins/tpm
+
+    echo -e "💻 ${purple}Installing tmux plugin manager...${reset}"
+    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return
+    
+    git clone $repo $dir
+}
+
 function stow_dotfiles() {
     echo -e "📁 ${purple}Running stow on dotfiles...${reset}"
     stow -t ~/ files
@@ -105,4 +115,5 @@ install_aur_packages
 install_dracula_themes
 install_ohmyzsh
 install_ohmyzsh_plugins
+install_tmux_plugin_manager
 stow_dotfiles
