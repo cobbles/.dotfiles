@@ -1,5 +1,0 @@
-set $term alacritty
-set $browser MOZ_ENABLE_WAYLAND=1 firefox
-set $filemanager nautilus
-set $editor vim
-set $exit nwg-bar -p center -a middle -i 48

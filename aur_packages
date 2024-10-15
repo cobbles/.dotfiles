@@ -10,3 +10,5 @@ xdg-desktop-portal-wlr
 bluez
 bluez-utils
 blueman
+libappindicator-gtk3
+pavucontrol

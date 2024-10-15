@@ -1,0 +1,110 @@
+@import url("../../dracula-themes/waybar/waybar/colors.css");
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Open Sans", "Font Awesome 6 Free Solid";
+    font-size: 11pt;
+    min-height: 0;
+}
+
+window#waybar {
+    /* opacity: 0.9; */
+    background: @background-darker;
+    color: @foreground;
+    /* border-bottom: 2px solid @background; */
+}
+#workspaces button {
+    padding: 0 10px;
+    background: @background;
+    color: @foreground;
+}
+#workspaces button:hover {
+    background: @background-darker;
+}
+#workspaces button.urgent {
+    background: @red;
+}
+#workspaces button.focused {
+    background: @purple;
+}
+
+#battery {
+    margin-right: 10px;
+    background-color: @background-darker;
+}
+
+#battery.charging {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @orange;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+}
+
+#cpu {
+    padding: 0 10px;
+    background-color: @background-darker;
+}
+
+#cpu.warning {
+    background-color: @background-darker;
+    color: @orange
+}
+
+#cpu.critical {
+    background-color: @background-darker;
+    color: @red
+}
+
+#memory {
+    margin-right: 10px;
+    background-color: @background-darker;
+}
+
+#memory.warning {
+    background-color: @background-darker;
+    color: @orange;
+}
+
+#memory.critical {
+    background-color: @background-darker;
+    color: @red;
+}
+
+#custom-notification {
+    background-color: @background-darker;
+    margin-right: 10px;
+}
+
+#custom-notification.notification {
+    background-color: @background-darker;
+    color: @yellow;
+}
+
+#custom-notification.dnd-notification {
+    background-color: @background-darker;
+    color: @yellow;
+}
+
+#custom-notification.inhibited-notification {
+    background-color: @background-darker;
+    color: @yellow;
+}
+
+#tray {
+    margin-right: 10px;
+}
+
+#pulseaudio {
+    background-color: @background-darker;
+    margin-right: 10px;
+}
+
+#backlight {
+    margin-right: 10px;
+}
