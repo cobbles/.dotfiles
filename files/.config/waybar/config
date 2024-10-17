@@ -9,16 +9,13 @@
   "modules-center": [
     "clock"
   ],
-  "modules-right": ["cpu", "memory", "tray", "custom/notification", "backlight", "pulseaudio", "battery"],
-
-
+  "modules-right": ["cpu", "memory", "tray", "custom/notification", "pulseaudio", "battery"],
   "sway/workspaces": {
     "disable-scroll": true
   },
   "clock": {
     "format": "{:%Y-%m-%d %I:%M %p}"
   },
-
   "battery": {
     "format": "{icon} {capacity}%",
     "format-icons": {
@@ -81,10 +78,7 @@
     "format-icons": "",
     "format-source": " {volume}%",
     "format-source-muted": "<span color='#ff5555'> --</span>",
-    "on-click": "pavucontrol"
-  },
-  "backlight": {
-    "format": "{icon} {percent}%",
-    "format-icons": [""]
+    "on-click": "swaync-client -t -sw",
+    "tooltip": false
   }
 }
