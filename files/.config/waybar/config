@@ -11,7 +11,8 @@
   ],
   "modules-right": ["cpu", "memory", "tray", "custom/notification", "pulseaudio", "battery"],
   "sway/workspaces": {
-    "disable-scroll": true
+    "disable-scroll": true,
+    "format": "{icon}"
   },
   "clock": {
     "format": "{:%Y-%m-%d %I:%M %p}"
@@ -56,14 +57,14 @@
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
-      "notification": "",
-      "none": "",
-      "dnd-notification": "",
-      "dnd-none": "",
-      "inhibited-notification": "",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "",
-      "dnd-inhibited-none": ""
+      "notification": "󰂚",
+      "none": "󰂚",
+      "dnd-notification": "󰂛",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󰂚",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰂛"
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
@@ -73,8 +74,8 @@
     "escape": true
   },
   "pulseaudio": {
-    "format": "{icon} {volume}%   {format_source}",
-    "format-muted": "<span color='#ff5555'> --</span>  {format_source}",
+    "format": "{icon} {volume}% {format_source}",
+    "format-muted": "<span color='#ff5555'> --</span> {format_source}",
     "format-icons": "",
     "format-source": " {volume}%",
     "format-source-muted": "<span color='#ff5555'> --</span>",

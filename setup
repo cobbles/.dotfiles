@@ -117,6 +117,11 @@ function stow_dotfiles() {
     stow -R -t ~/ files
 }
 
+function stow_greetd() {
+    echo -e "📁 ${purple}Running stow on greetd...${reset}"
+    sudo stow -R -t /etc greetd
+}
+
 generate_ssh_key
 install_yay
 install_aur_packages

@@ -21,6 +21,7 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 set $menu rofi -show drun
+
 focus_follows_mouse no
 
 bindswitch lid:toggle output "eDP-1" toggle
@@ -85,6 +86,9 @@ output * bg #282a36 solid_color
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
+
+    # Lock sway
+    bindsym $mod+x exec gtklock
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'

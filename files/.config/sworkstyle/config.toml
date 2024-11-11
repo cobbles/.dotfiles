@@ -1,0 +1,4 @@
+separator = ' '
+'{pattern}' = '{icon}'
+
+'firefox' = '<span color='#ffb86c'>AA</span>'

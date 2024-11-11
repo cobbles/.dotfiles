@@ -1,4 +1,3 @@
-nwg-shell
 firefox
 stow
 docker
@@ -12,3 +11,8 @@ bluez-utils
 blueman
 libappindicator-gtk3
 pavucontrol
+ttf-font-awesome
+otf-firamono-nerd
+otf-droid-nerd
+greetd-gtkgreet
+neovim

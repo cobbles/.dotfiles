@@ -76,7 +76,7 @@
     "menubar#label": {
       "menu#power-buttons": {
         "label": " ", 
-        "position": "left",
+        "position": "right",
         "actions": [ 
           {
             "label": " Reboot",
@@ -96,18 +96,6 @@
           }
         ]
       }
-    },
-    "buttons-grid": {
-      "actions": [
-        {
-          "label": "直",
-          "command": "~/.config/rofi/rofi-wifi-menu.sh"
-        },
-        {
-          "label": "",
-          "command": "~/.config/rofi/rofi-bluetooth"
-        }
-      ]
     }
   }
 }

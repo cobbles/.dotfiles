@@ -1,2 +1,14 @@
-shell = "/bin/zsh"
-import = ["~/dracula-themes/alacritty/dracula.toml"]
+terminal.shell = "/bin/zsh"
+general.import = ["~/dracula-themes/alacritty/dracula.toml"]
+
+[font]
+size = 11.25
+offset = { x = 0, y = 8 }
+glyph_offset = { x = 0, y = 5 }
+normal = { family = "DroidSansM Nerd Font", style = "Regular" }
+bold = { family = "DroidSansM Nerd Font", style = "Regular"  }
+italic = { family = "DroidSansM Nerd Font", style = "Regular"  }
+bold_italic = { family = "DroidSansM Nerd Font", style = "Regular" }
+
+[window]
+padding = { x = 10, y = 10 }

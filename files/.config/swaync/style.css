@@ -23,7 +23,7 @@
  }
  
  .notification-row {
-   outline: none;
+   /* outline: none; */
  }
  
  .notification-row:focus,
@@ -63,6 +63,7 @@
    background: transparent;
    padding: 6px;
    border-radius: 12px;
+   box-shadow: none;
  }
  
  .close-button {

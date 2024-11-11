@@ -3,8 +3,8 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Open Sans", "Font Awesome 6 Free Solid";
-    font-size: 11pt;
+    font-family: "DroidSansM Nerd Font";
+    font-size: 12pt;
     min-height: 0;
 }
 
@@ -14,19 +14,31 @@ window#waybar {
     color: @foreground;
     /* border-bottom: 2px solid @background; */
 }
+
 #workspaces button {
-    padding: 0 10px;
-    background: @background;
-    color: @foreground;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 0px;
+    margin-right: 0px;
 }
+
+#workspaces button label{
+    margin-bottom: 3px;
+}
+
 #workspaces button:hover {
-    background: @background-darker;
+    background: @purple;
 }
 #workspaces button.urgent {
     background: @red;
 }
 #workspaces button.focused {
-    background: @purple;
+    border-bottom: 3px solid;
+    border-color: @purple;
+}
+
+#workspaces button.focused label{
+    margin-bottom: 0px;
 }
 
 #battery {
