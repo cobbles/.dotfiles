@@ -242,6 +242,9 @@ bar {
 # Style
 #
 default_border none
+# default_border pixel 1
+# gaps inner 5
+client.focused "#bd93f9" "#bd93f9" "#ffffff" "#bd93f9"
 
 include @sysconfdir@/sway/config.d/*
 
