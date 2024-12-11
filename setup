@@ -122,6 +122,11 @@ function stow_greetd() {
     sudo stow -R -t /etc greetd
 }
 
+function enable_services() {
+    echo -e "🤝 ${purple}Enabling greetd service...${reset}"
+    systemctl enable greetd
+}
+
 generate_ssh_key
 install_yay
 install_aur_packages
@@ -131,3 +136,5 @@ install_ohmyzsh
 install_ohmyzsh_plugins
 install_tmux_plugin_manager
 stow_dotfiles
+stow_greetd
+enable_services
