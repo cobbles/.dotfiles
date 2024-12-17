@@ -12,7 +12,7 @@
   "modules-right": ["cpu", "memory", "tray", "custom/notification", "pulseaudio", "battery"],
   "sway/workspaces": {
     "disable-scroll": true,
-    "format": "{icon}"
+    "format":"{icon}"
   },
   "clock": {
     "format": "{:%Y-%m-%d %I:%M %p}"
