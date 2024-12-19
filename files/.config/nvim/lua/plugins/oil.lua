@@ -3,12 +3,15 @@
 return {
   'stevearc/oil.nvim',
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {},
+  config = function()
+    require('oil').setup {
+      view_options = {
+        show_hidden = true
+      }
+    }
+  end,
   keys = {
-    { '-', ':Oil<CR>', desc = 'Open parent directory' },
+    { '-', ':Oil --float<CR>', desc = 'Open parent directory' },
   },
-  view_options = {
-    show_hidden = true,
-  }
 }
 
