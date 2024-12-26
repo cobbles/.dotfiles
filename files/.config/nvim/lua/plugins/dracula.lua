@@ -8,9 +8,14 @@ return {
         require('dracula').setup({
             colors = {
                 bg = "#282a36",
+            },
+            overrides = {
+                SpellBad = { undercurl = true, sp = '#6272A4' },
+                DiagnosticDeprecated = { undercurl = true, sp = '#8be9fd'}
             }
         })
         vim.cmd('colorscheme dracula')
+        vim.cmd('')
     end,
 }
 

@@ -10,11 +10,19 @@ return {
       }
     },
     opts = {
-      ensure_installed = 'all',
+      ensure_installed = {
+        'lua',
+        'php',
+        'php_only',
+        'phpdoc',
+        'javascript',
+        'blade',
+        'markdown'
+      },
       auto_intsall = false,
       highlight = { enable = true },
       indent = { enable = true },
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = true,
       context_commentstring = { enabled = true }
     },
     config = function(_, opts)

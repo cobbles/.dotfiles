@@ -18,7 +18,7 @@ return {
     -- PHP
     require('lspconfig').intelephense.setup({})
 
-    -- Keymaps
+    -- Key maps
     vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
     vim.keymap.set('n', 'gd', ':Telescope lsp_definitions<CR>')
     vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
@@ -30,16 +30,11 @@ return {
 
     -- Diagnostic configuration
     vim.diagnostic.config({
-      virtual_text = false,
-      float = {
+      signs = false,
+      virtual_text = {
         source = true,
       }
     })
 
-    -- Sign configuration
-    vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
-    vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
-    vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
-    vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
   end
 }
