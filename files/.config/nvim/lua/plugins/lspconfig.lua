@@ -15,8 +15,20 @@ return {
       ensure_installed = { 'intelephense' }
     })
 
+    local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
     -- PHP
-    require('lspconfig').intelephense.setup({})
+    require('lspconfig').intelephense.setup({ capabilities = capabilities })
+
+    -- JSON
+    require('lspconfig').jsonls.setup({
+      capabilities = capabilities,
+      settings = {
+        json = {
+          schemas = require('schemastore').json.schemas(),
+        },
+      },
+    })
 
     -- Key maps
     vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
