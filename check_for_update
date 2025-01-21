@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [[ `git -C ~/.dotfiles diff-index HEAD` ]]; then
+    echo -n "[.dotfiles] Would you like to update? [Y/n] "
+    read -r -k 1 option
+    [[ "$option" = $'\n' ]] || echo
+    case "$option" in
+      [yY$'\n']) ~/.dotfiles/setup --pull-latest ;;
+    esac
+fi

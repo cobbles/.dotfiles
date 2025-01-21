@@ -12,4 +12,6 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+~/.dotfiles/check_for_update
+
 alias dcr="docker compose run --rm"
