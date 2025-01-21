@@ -4,9 +4,9 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-include outputs
+# include outputs
 include autostart
-include workspaces
+# include workspaces
 
 ### Variables
 #
@@ -25,8 +25,8 @@ set $menu rofi -show drun
 focus_follows_mouse no
 
 bindswitch lid:toggle output "eDP-1" toggle
-
-### Output configuration
+# manually toggle laptop screen
+bindsym $mod+p output "eDP-1" toggle
 #
 # Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
 # output * bg @datadir@/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
