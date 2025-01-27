@@ -16,6 +16,29 @@ reset="\e[0m"
 
 currDir=$PWD
 
+pullLatest=false
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --pull-latest)
+        echo "here"
+        pullLatest=true
+  esac
+  shift
+done
+
+function pull_latest() {
+    dir=~/.dotfiles
+    if [[ pullLatest ]] then
+        echo -e " ${purple}Pulling latest changes...${reset}"
+        cd $dir
+        git add -A
+        git stash
+        git pull
+        cd $currDir
+    fi
+}
+
 function generate_ssh_key() {
     file=~/.ssh/id_rsa
     
@@ -127,6 +150,7 @@ function enable_services() {
     systemctl enable greetd
 }
 
+pull_latest
 generate_ssh_key
 install_yay
 install_aur_packages

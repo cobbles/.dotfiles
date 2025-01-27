@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if ! [[ `git fetch` && `git status | grep "up to date"` ]]; then
+if ! [[ `git -C ~/.dotfiles status | grep "up to date"` ]]; then
     echo -n "[.dotfiles] Would you like to update? [Y/n] "
     read option
     [[ "$option" = $'\n' ]] || echo
@@ -7,3 +7,5 @@ if ! [[ `git fetch` && `git status | grep "up to date"` ]]; then
       [yY$'\n']) ~/.dotfiles/setup --pull-latest ;;
     esac
 fi
+# run fetch async after each so terminal load time is 
+screen -dm git -C ~/.dotfiles fetch
