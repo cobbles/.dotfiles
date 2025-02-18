@@ -7,6 +7,9 @@ return {
     require('oil').setup {
       view_options = {
         show_hidden = true
+      },
+      keymaps = {
+        ["yp"] = { "actions.yank_entry", opts = {modify = ":p:."} },
       }
     }
   end,
