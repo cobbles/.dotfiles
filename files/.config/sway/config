@@ -9,6 +9,11 @@ include autostart
 # include workspaces
 
 ### Variables
+
+input "type:keyboard" {
+    xkb_options caps:ctrl_modifier
+}
+
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
