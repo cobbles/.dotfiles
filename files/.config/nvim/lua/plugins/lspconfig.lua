@@ -1,52 +1,94 @@
--- Language Server Protocol
-
+-- Language Server Client
 return {
-  'neovim/nvim-lspconfig',
-  event = 'VeryLazy',
+  "neovim/nvim-lspconfig",
   dependencies = {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'b0o/schemastore.nvim',
+    -- language server 
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    -- snippets
+    "L3MON4D3/LuaSnip",
+    -- completion
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
+    "saadparwaiz1/cmp_luasnip",
+    -- notifications
+    "j-hui/fidget.nvim",
+    -- formatters
+    "stevearc/conform.nvim"
   },
   config = function()
-    require('mason').setup({})
-    require('mason-lspconfig').setup({ 
-      automatic_installation = true,
-      ensure_installed = { 'intelephense' }
+    -- formatters
+    require("conform").setup({})
+
+    -- notifications
+    require("fidget").setup({})
+
+    -- snippets
+    local luasnip = require('luasnip')
+
+    -- completion
+    local cmp = require("cmp")
+    cmp.setup({
+        mapping = cmp.mapping.preset.insert({
+            ["<Tab>"] = cmp.mapping.select_next_item(),
+            ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+            ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        }),
+        sources = cmp.config.sources({
+            { name = 'nvim_lsp' },
+            { name = 'nvim_lsp_signature_help' },
+            { name = 'luasnip' },
+            { name = 'buffer' },
+            { name = 'path' },
+        }),
     })
+    local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities())
 
-    local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
-    -- PHP
-    require('lspconfig').intelephense.setup({ capabilities = capabilities })
-
-    -- JSON
-    require('lspconfig').jsonls.setup({
-      capabilities = capabilities,
-      settings = {
-        json = {
-          schemas = require('schemastore').json.schemas(),
-        },
+    -- language server
+    require("mason").setup()
+    require("mason-lspconfig").setup({
+      ensure_installed = {
+        'intelephense',
+        'ts_ls'
       },
-    })
-
-    -- Key maps
-    vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
-    vim.keymap.set('n', 'gd', ':Telescope lsp_definitions<CR>')
-    vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-    vim.keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>')
-    vim.keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
-    vim.keymap.set('n', '<Leader>lr', ':LspRestart<CR>', { silent = true })
-    vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-    vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-
-    -- Diagnostic configuration
-    vim.diagnostic.config({
-      signs = false,
-      virtual_text = {
-        source = true,
+      handlers = {
+        function(server_name)
+            require("lspconfig")[server_name].setup({
+                capabilities = capabilities
+            })
+        end,
+        ["lua_ls"] = function()
+            local lspconfig = require("lspconfig")
+            lspconfig.lua_ls.setup {
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { "vim" },
+                        }
+                    }
+                }
+            }
+        end
       }
     })
 
+    vim.diagnostic.config({
+        float = {
+            focusable = false,
+            style = "minimal",
+            border = "rounded",
+            source = "always",
+            header = "",
+            prefix = "",
+        },
+    })
   end
 }

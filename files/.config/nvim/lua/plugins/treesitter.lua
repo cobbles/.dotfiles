@@ -1,5 +1,4 @@
 -- Syntax highlighting
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -17,7 +16,8 @@ return {
         'phpdoc',
         'javascript',
         'blade',
-        'markdown'
+        'markdown',
+        'dockerfile'
       },
       auto_intsall = false,
       highlight = { enable = true },

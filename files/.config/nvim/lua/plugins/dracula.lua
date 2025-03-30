@@ -1,5 +1,4 @@
 -- Color scheme
-
 return {
     'Mofiqul/dracula.nvim',
     lazy = false,
@@ -15,7 +14,6 @@ return {
             }
         })
         vim.cmd('colorscheme dracula')
-        vim.cmd('')
     end,
 }
 

@@ -1,5 +1,4 @@
 -- Commenting
-
 return {
     'tpope/vim-commentary',
     config = function()
