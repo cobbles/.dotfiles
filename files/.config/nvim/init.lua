@@ -10,8 +10,7 @@ local autocmd = vim.api.nvim_create_autocmd
 -- Keymaps for LSP
 autocmd('LspAttach', {
     group = CobblesGroup,
-    callback = function(e)
-        local opts = { buffer = e.buf }
+    callback = function()
         vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
         vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
         vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')

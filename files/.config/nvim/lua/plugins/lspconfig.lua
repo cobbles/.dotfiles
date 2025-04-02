@@ -55,13 +55,21 @@ return {
     require("mason").setup()
     require("mason-lspconfig").setup({
       ensure_installed = {
-        'intelephense',
+        'phpactor',
         'ts_ls'
       },
       handlers = {
         function(server_name)
             require("lspconfig")[server_name].setup({
                 capabilities = capabilities
+            })
+        end,
+        ["phpactor"] = function()
+            require("lspconfig").phpactor.setup({
+                capabilities = capabilities,
+                init_options = {
+                    ["language_server_phpstan.enabled"] = true,
+                }
             })
         end,
         ["lua_ls"] = function()
@@ -81,6 +89,9 @@ return {
     })
 
     vim.diagnostic.config({
+        virtual_text = {
+            source = true
+        },
         float = {
             focusable = false,
             style = "minimal",
