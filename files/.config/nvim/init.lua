@@ -3,6 +3,9 @@ require('cobbles.keymaps')
 
 require("config.lazy")
 
+local nvm_path = os.getenv("HOME") .. "/.nvm/versions/node/v20.17.0/bin"
+vim.env.PATH = nvm_path .. ":" .. vim.env.PATH
+
 local augroup = vim.api.nvim_create_augroup
 local CobblesGroup = augroup('CobblesGroup', {})
 local autocmd = vim.api.nvim_create_autocmd
