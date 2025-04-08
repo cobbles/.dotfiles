@@ -28,7 +28,7 @@ done
 
 function pull_latest() {
     dir=~/.dotfiles
-    if [[ pullLatest ]] then
+    if [[ $pullLatest = true ]] then
         echo -e " ${purple}Pulling latest changes...${reset}"
         cd $dir
         git add -A
@@ -63,7 +63,7 @@ function install_yay() {
 function install_aur_packages() {
     echo -e "📦 ${purple}Installing aur packages...${reset}"
     
-    cat aur_packages | xargs yay -S --noconfirm --answerdiff=None --answeredit=None
+    cat ~/.dotfiles/aur_packages | xargs yay -S --noconfirm --answerdiff=None --answeredit=None
 }
 
 function install_dracula_themes() {
@@ -136,12 +136,12 @@ function install_tmux_plugin_manager() {
 
 function stow_dotfiles() {
     echo -e "📁 ${purple}Running stow on dotfiles...${reset}"
-    stow -R -t ~/ files
+    stow -R -d ~/.dotfiles -t ~/ files
 }
 
 function stow_greetd() {
     echo -e "📁 ${purple}Running stow on greetd...${reset}"
-    sudo stow -R -t /etc greetd
+    sudo stow -R -d ~/.dotfiles -t /etc greetd
 }
 
 function enable_services() {
