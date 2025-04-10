@@ -8,15 +8,26 @@ else
     selected=`echo "$items" | fzf`
 fi
 
-if [[ $selected -eq "" ]] then
+if [[ -z $selected ]]; then
     exit 0
 fi
 
-dirname=`basename $selected | sed 's/\./_/g'`
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
 
-tmux switch-client -t =$dirname
-if [[ $? -eq 0 ]]; then
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected \; \
+      new-window -c "$selected" \; \
+      new-window -c "$selected" \; \
+      select-window -t "$selected_name":1 \;
     exit 0
 fi
 
-tmux new-session -c $selected -d -s $dirname && tmux switch-client -t $dirname || tmux new -c $selected -A -s $dirname
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+   tmux new-session -d -s "$selected_name" -c "$selected"
+   tmux new-window -t "$selected_name" -c "$selected"
+   tmux new-window -t "$selected_name" -c "$selected"
+   tmux select-window -t "$selected_name":1
+fi
+
+tmux switch-client -t $selected_name
