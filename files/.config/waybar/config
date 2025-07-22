@@ -20,7 +20,7 @@
   ],
   "sway/workspaces": {
     "disable-scroll": true,
-    "format":"{name}: {windows}",
+    "format":"{name} {windows}",
     "window-format": "",
     "window-rewrite": {
         ".*": ""
