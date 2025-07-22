@@ -84,19 +84,6 @@ function install_dracula_themes() {
     ln -s -f ~/dracula-themes/gtk ~/.themes/Dracula
 }
 
-function install_gdm_dracula_theme() {
-    repo=https://github.com/elbouillon/DraculaGDM
-    dir=~/dracula-themes/gdm
-    
-    echo -e "🧛 ${purple}Installing gdm dracula theme...${reset}"
-
-    [ -d $dir ] && echo -e "${green} $dir already exists... skipping.${reset}" && return
-    
-    git clone $repo $dir
-
-    sudo cp -f $dir/gdm/gnome-shell-theme.gresource /usr/share/gnome-shell/gnome-shell-theme.gresource
-}
-
 function install_ohmyzsh() {
     dir=~/.oh-my-zsh
     
@@ -139,14 +126,14 @@ function stow_dotfiles() {
     stow -R -d ~/.dotfiles -t ~/ files
 }
 
-function stow_greetd() {
-    echo -e "📁 ${purple}Running stow on greetd...${reset}"
-    sudo stow -R -d ~/.dotfiles -t /etc greetd
+function configure_ly() {
+    echo -e "📁 ${purple}Copying ly config...${reset}"
+    sudo cp -f ~/.dotfiles/ly/config.ini /etc/ly/config.ini
 }
 
 function enable_services() {
-    echo -e "🤝 ${purple}Enabling greetd service...${reset}"
-    systemctl enable greetd
+    echo -e "🤝 ${purple}Enabling ly service...${reset}"
+    systemctl enable ly
 }
 
 pull_latest
@@ -159,5 +146,5 @@ install_ohmyzsh
 install_ohmyzsh_plugins
 install_tmux_plugin_manager
 stow_dotfiles
-stow_greetd
+configure_ly
 enable_services
