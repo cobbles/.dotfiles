@@ -1,67 +1,66 @@
 {
   "layer": "top",
   "position": "bottom",
-  "height": 26,
-  "spacing": 4,
+  "height": 32,
+  "spacing": 10,
   "modules-left": [
     "sway/workspaces"
   ],
   "modules-center": [
     "clock"
   ],
-  "modules-right": ["cpu", "memory", "tray", "custom/notification", "pulseaudio", "battery"],
+  "modules-right": [
+    "pulseaudio",
+    "backlight",
+    "custom/swaync",
+    "tray",
+    "cpu",
+    "memory", 
+    "battery"
+  ],
   "sway/workspaces": {
     "disable-scroll": true,
-    "format":"{icon}"
+    "format":"{name}: {windows}",
+    "window-format": "",
+    "window-rewrite": {
+        ".*": ""
+    }
   },
   "clock": {
     "format": "{:%Y-%m-%d %I:%M %p}"
   },
-  "battery": {
-    "format": "{icon} {capacity}%",
-    "format-icons": {
-      "default": ["","","","",""],
-      "charging": [""]
-    },
-    "states": {
-        "warning": 25,
-        "critical": 10
-    },
-    "interval": 2,
-    "tooltip": false
+  "cpu": {
+    "format": "  {usage}%", 
   },
-
+  "memory": {
+    "interval": 10,
+    "format": "  {used}/{total} GB"
+  },
   "tray": {
     "spacing": 10,
     "show-passive-items": true
   },
-
-  "cpu": {
-    "format": " {usage}%", 
-    "states": {
-      "warning": 75,
-      "critical": 90
-    }
-  },
-
-  "memory": {
-    "interval": 10,
-    "format": " {used}/{total} GB",
-    "states": {
-      "warning": 75,
-      "critical": 90
-    }
-  },
-
-  "custom/notification": {
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-icons": [""," "],
+    "format-muted": "  {volume}%",
     "tooltip": false,
-    "format": "{icon}",
+    "on-click": "pavucontrol"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃞","󰃟","󰃠"]
+  },
+  "custom/swaync": {
+    "tooltip": false,
+    "format": "{icon} ",
     "format-icons": {
-      "notification": "󰂚",
+      "notification": "󱅫",
       "none": "󰂚",
       "dnd-notification": "󰂛",
       "dnd-none": "󰂛",
-      "inhibited-notification": "󰂚",
+      "inhibited-notification": "󱅫",
       "inhibited-none": "󰂚",
       "dnd-inhibited-notification": "󰂛",
       "dnd-inhibited-none": "󰂛"
@@ -73,13 +72,13 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-  "pulseaudio": {
-    "format": "{icon} {volume}% {format_source}",
-    "format-muted": "<span color='#ff5555'> --</span> {format_source}",
-    "format-icons": "",
-    "format-source": " {volume}%",
-    "format-source-muted": "<span color='#ff5555'> --</span>",
-    "on-click": "swaync-client -t -sw",
+  "battery": {
+    "format": "{icon}  {capacity}%   ",
+    "format-icons": {
+      "default": ["","","","",""],
+      "charging": [""]
+    },
+    "interval": 2,
     "tooltip": false
   }
 }

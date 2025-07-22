@@ -4,9 +4,10 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-# include outputs
-include autostart
-# include workspaces
+exec_always swaync
+exec_always nm-applet --indicator
+exec_always blueman-applet
+
 
 ### Variables
 

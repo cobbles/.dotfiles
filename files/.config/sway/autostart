@@ -1,4 +1,3 @@
 exec_always swaync
 exec_always nm-applet --indicator
 exec_always blueman-applet
-exec_always sworkstyle &> /tmp/sworkstyle.log

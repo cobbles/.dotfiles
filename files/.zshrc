@@ -15,3 +15,4 @@ source $ZSH/oh-my-zsh.sh
 ~/.dotfiles/check_for_update
 
 alias dcr="docker compose run --rm"
+export PATH="$PATH:$HOME/.dotnet/tools"
