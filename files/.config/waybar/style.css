@@ -1,1 +1,7 @@
 @import url("../../dracula-themes/waybar/waybar/style.css");
+
+* {
+    font-family: FiraMono Nerd Font;
+    font-size: 14px;
+    min-height: 0;
+}

@@ -30,19 +30,19 @@
     "format": "{:%Y-%m-%d %I:%M %p}"
   },
   "cpu": {
-    "format": "  {usage}%", 
+    "format": " {usage}%", 
   },
   "memory": {
     "interval": 10,
-    "format": "  {used}/{total} GB"
+    "format": " {used}/{total} GB"
   },
   "tray": {
     "spacing": 10,
     "show-passive-items": true
   },
   "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-icons": [""," "],
+    "format": "{icon} {volume}%",
+    "format-icons": ["",""],
     "format-muted": "  {volume}%",
     "tooltip": false,
     "on-click": "pavucontrol"
@@ -73,7 +73,7 @@
     "escape": true
   },
   "battery": {
-    "format": "{icon}  {capacity}%   ",
+    "format": "{icon} {capacity}%  ",
     "format-icons": {
       "default": ["","","","",""],
       "charging": [""]
