@@ -7,6 +7,8 @@
 exec_always swaync
 exec_always nm-applet --indicator
 exec_always blueman-applet
+exec_always systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec_always systemctl --user restart start xdg-desktop-portal-wlr.service
 
 
 ### Variables
