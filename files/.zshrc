@@ -16,3 +16,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias dcr="docker compose run --rm"
 export PATH="$PATH:$HOME/.dotnet/tools"
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
