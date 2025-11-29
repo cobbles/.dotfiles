@@ -43,3 +43,13 @@ vim.keymap.set('n', '<C-h>', ':wincmd h<CR>')
 vim.keymap.set('n', '<C-j>', ':wincmd j<CR>')
 vim.keymap.set('n', '<C-k>', ':wincmd k<CR>')
 vim.keymap.set('n', '<C-l>', ':wincmd l<CR>')
+
+-- Move between terminal pane
+local term_switch = function(direction)
+  return string.format('<C-\\><C-n><C-w>%s', direction)
+end
+
+vim.keymap.set('t', '<C-h>', term_switch('h'), { noremap = true })
+vim.keymap.set('t', '<C-j>', term_switch('j'), { noremap = true })
+vim.keymap.set('t', '<C-k>', term_switch('k'), { noremap = true })
+vim.keymap.set('t', '<C-l>', term_switch('l'), { noremap = true })
