@@ -27,7 +27,7 @@ return {
     require("fidget").setup({})
 
     -- snippets
-    local luasnip = require('luasnip')
+    -- local luasnip = require('luasnip')
 
     -- completion
     local cmp = require("cmp")
