@@ -22,7 +22,7 @@ return {
             dashboard.button( "space g", "  > Search" , ""),
             dashboard.button( "space f", "  > Find File", ""),
             dashboard.button( "o", "  > File Tree", ":Oil<CR>"),
-            dashboard.button( "p", "  > Plugins", ":Lazy<CR>"), 
+            dashboard.button( "p", "  > Plugins", ":Lazy<CR>"),
             dashboard.button( "l", "  > LSPs", ":Mason<CR>"),
             dashboard.button( "space ?", "󰋗  > Help" , ""),
             dashboard.button( "q", "󰩈  > Quit", ":q<CR>"),

@@ -1,0 +1,67 @@
+# General
+
+Clear search highlighting | `<leader>k`
+Open current file in default program | `<leader>x`
+Move lines up and down (Normal/Insert/Visual) | `<A-j>`/`<A-k>`
+Move between Vim splits | `<C-h/j/k/l>`
+Move between terminal panes | `t:<C-h/j/k/l>`
+Move by visual lines when wrapped | `n:j`/`n:k`
+Re-select visual selection after indenting| `v:<`/`v:>`
+Yank without moving cursor | `v:y`
+Paste without yanking replaced text | `v:p`
+Insert trailing ; or , | `i:;;`/`i:,,`
+
+# alpha-nvim (Dashboard)
+
+Search | `space g`
+Find File | `space f`
+File Tree | `o` | `:Oil<CR>`
+Plugins | `p` | `:Lazy<CR>`
+LSPs | `l` | `:Mason<CR>`
+Help | `space ?`
+Quit | `q` | `:q<CR>`
+
+# cheatsheet.nvim
+
+Open the plugin cheatsheet | `:Cheatsheet`
+
+# copilot.vim
+
+Accept Copilot suggestion | `i:<C-l>`
+
+# gitsigns.nvim
+
+Jump to the next hunk | `:Gitsigns next_hunk`
+Jump to the previous hunk | `:Gitsigns prev_hunk`
+Preview the hunk | `:Gitsigns preview_hunk`
+Show blame for the current line | `:Gitsigns blame_line`
+
+# nvim-cmp (Completion)
+
+Select next item | `<Tab>`
+Select previous item | `<S-Tab>`
+Confirm selection | `<CR>`
+
+# oil.nvim (File Explorer)
+
+Open parent directory | `-`
+Yank file path (relative) | `yp`
+
+# opencode.nvim
+
+Ask opencode | `n/v:<C-a>`
+Execute opencode action | `n/v:<C-x>`
+Add to opencode | `n/v:ga`
+Toggle opencode | `n/t:<C-.>`
+Opencode half page up | `n:<S-C-u>`
+Opencode half page down | `n:<S-C-d>`
+
+# telescope.nvim (Fuzzy Finder)
+
+Find files | `<leader>f`
+Find all files | `<leader>F`
+List open buffers | `<leader>b`
+Grep files | `<leader>g`
+Grep all files | `<leader>G`
+Search help tags | `<leader>h`
+LSP document symbols | `<leader>s`
