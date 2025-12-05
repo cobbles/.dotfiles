@@ -5,8 +5,6 @@ return {
     -- language server 
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    -- snippets
-    "L3MON4D3/LuaSnip",
     -- completion
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lsp",
@@ -22,13 +20,8 @@ return {
   config = function()
     -- formatters
     require("conform").setup({})
-
     -- notifications
     require("fidget").setup({})
-
-    -- snippets
-    -- local luasnip = require('luasnip')
-
     -- completion
     local cmp = require("cmp")
     cmp.setup({
@@ -40,9 +33,6 @@ return {
         sources = cmp.config.sources({
             { name = 'nvim_lsp' },
             { name = 'nvim_lsp_signature_help' },
-            { name = 'luasnip' },
-            { name = 'buffer' },
-            { name = 'path' },
         }),
     })
     local capabilities = vim.tbl_deep_extend(
@@ -55,36 +45,15 @@ return {
     require("mason").setup()
     require("mason-lspconfig").setup({
       ensure_installed = {
-        'phpactor',
-        'ts_ls'
+        'lua_ls',
       },
       handlers = {
         function(server_name)
-            require("lspconfig")[server_name].setup({
+            local server_opts = {
                 capabilities = capabilities
-            })
-        end,
-        ["phpactor"] = function()
-            require("lspconfig").phpactor.setup({
-                capabilities = capabilities,
-                init_options = {
-                    ["language_server_phpstan.enabled"] = true,
-                }
-            })
-        end,
-        ["lua_ls"] = function()
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup {
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { "vim" },
-                        }
-                    }
-                }
             }
-        end
+            require("lspconfig")[server_name].setup(server_opts)
+        end,
       }
     })
 
