@@ -14,13 +14,13 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd('LspAttach', {
     group = CobblesGroup,
     callback = function()
-        vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
-        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
-        vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-        vim.keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>')
-        vim.keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
-        vim.keymap.set('n', '<Leader>lr', ':LspRestart<CR>', { silent = true })
-        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-        vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+        vim.keymap.set('n', '<Leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'LSP: Show diagnostics' })
+        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { desc = 'LSP: Go to definition' })
+        vim.keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'LSP: Code action' })
+        vim.keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>', { desc = 'LSP: Go to implementation' })
+        vim.keymap.set('n', 'gr', ':Telescope lsp_references<CR>', { desc = 'LSP: Go to references' })
+        vim.keymap.set('n', '<Leader>lr', ':LspRestart<CR>', { silent = true, desc = 'LSP: Restart' })
+        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'LSP: Hover' })
+        vim.keymap.set('n', '<Leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'LSP: Rename' })
     end
 })
