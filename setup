@@ -16,6 +16,7 @@ reset="\e[0m"
 
 currDir=$PWD
 
+currentCommit=$(git rev-parse HEAD)
 pullLatest=false
 
 while [[ $# -gt 0 ]]; do
@@ -25,6 +26,22 @@ while [[ $# -gt 0 ]]; do
   esac
   shift
 done
+
+function show_banner() {
+    echo -e "${purple}"
+    cat << "EOF"
+       __________  ____  ____  __    ___________
+      / ____/ __ \/ __ )/ __ )/ /   / ____/ ___/
+     / /   / / / / __  / __  / /   / __/  \__ \
+    / /___/ /_/ / /_/ / /_/ / /___/ /___ ___/ /
+    \____/\____/_____/_____/_____/_____//____/
+EOF
+    echo -e "${reset}"
+    echo -e "${cyan}               cobbles dotfiles${reset}"
+    echo -e "${comment}          https://github.com/cobbles/.dotfiles${reset}"
+    echo ""
+}
+
 
 function pull_latest() {
     dir=~/.dotfiles
@@ -40,18 +57,18 @@ function pull_latest() {
 
 function generate_ssh_key() {
     file=~/.ssh/id_rsa
-    
-    echo -e "🔐 ${purple}Generating new ssh key...${reset}"
-    [ -f $file ] && echo -e "${green}   $file already exists... skipping.${reset}" && return 
 
-    ssh-keygen -t ed25519 -N "" -f $file 
+    echo -e "🔐 ${purple}Generating new ssh key...${reset}"
+    [ -f $file ] && echo -e "${green}   $file already exists... skipping.${reset}" && return
+
+    ssh-keygen -t ed25519 -N "" -f $file
 }
 
 function install_yay() {
     dir=~/yay-bin
-    
+
     echo -e "📦 ${purple}Installing yay...${reset}"
-    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return 
+    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return
 
     pacman -S --needed git base-devel
     git clone https://aur.archlinux.org/yay-bin.git $dir
@@ -62,7 +79,7 @@ function install_yay() {
 
 function install_aur_packages() {
     echo -e "📦 ${purple}Installing aur packages...${reset}"
-    
+
     cat ~/.dotfiles/aur_packages | xargs yay -S --noconfirm --answerdiff=None --answeredit=None
 }
 
@@ -70,7 +87,7 @@ function install_dracula_themes() {
     repo=https://github.com/dracula
     dir=~/dracula-themes
     themes="alacritty gtk rofi zsh waybar"
-    
+
     echo -e "🧛 ${purple}Installing dracula themes...${reset}"
 
     for theme in $themes
@@ -86,9 +103,9 @@ function install_dracula_themes() {
 
 function install_ohmyzsh() {
     dir=~/.oh-my-zsh
-    
+
     echo -e "💻 ${purple}Installing ohmyzsh...${reset}"
-    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return 
+    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
 
@@ -103,7 +120,7 @@ function install_ohmyzsh_plugins() {
     plugins="zsh-autosuggestions zsh-syntax-highlighting"
 
     echo -e "💻 ${purple}Installing dracula ohmyzsh plugins...${reset}"
-    
+
     for plugin in $plugins
     do
         [ -d $dir/$plugin ] && echo -e "${green} $dir/$plugin already exists... skipping.${reset}" && continue
@@ -117,7 +134,7 @@ function install_tmux_plugin_manager() {
 
     echo -e "💻 ${purple}Installing tmux plugin manager...${reset}"
     [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return
-    
+
     git clone $repo $dir
 }
 
@@ -136,6 +153,18 @@ function enable_services() {
     systemctl enable ly
 }
 
+function show_commit_summary() {
+    dir=~/.dotfiles
+    if [[ $pullLatest = true ]] then
+        echo -e "📋 ${purple}Changes:${reset}"
+        cd $dir
+        git --no-pager log --pretty=format:'[%C(yellow)%h%Creset]    %C(blue)%s%Creset' $currentCommit..HEAD
+        echo ""
+        cd $currDir
+    fi
+}
+
+show_banner
 pull_latest
 generate_ssh_key
 install_yay
@@ -148,3 +177,5 @@ install_tmux_plugin_manager
 stow_dotfiles
 configure_ly
 enable_services
+show_commit_summary
+
