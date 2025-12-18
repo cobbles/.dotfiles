@@ -1,0 +1,20 @@
+commit-msg:
+  commands:
+    lint-message:
+      run: npx commitlint --edit {1}
+
+pre-push:
+  commands:
+    no-wip:
+      run: git log origin/main..HEAD --oneline | grep -qvE "wip|fixup!"
+
+post-checkout:
+  commands:
+    set-template:
+      run: git config commit.template .gitmessage
+
+post-merge: # Runs when they pull new code
+  commands:
+    set-template:
+      run: git config commit.template .gitmessage
+
