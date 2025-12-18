@@ -19,3 +19,5 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+[ -f ~/.zshrc.work ] && source ~/.zshrc.work
