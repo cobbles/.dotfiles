@@ -143,4 +143,4 @@ configuration {
 element-text, element-icon {
     background-color: inherit;
     text-color: inherit;
-}ula-themes/rofi/theme/config2.rasi"
+}
