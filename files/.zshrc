@@ -1,23 +1,21 @@
-export ZSH="$HOME/.oh-my-zsh"
+source /usr/share/zsh/scripts/zplug/init.zsh
 
-PATH=~/.local/bin:$PATH
+export PATH=~/.local/bin:$PATH:$GOPATH
 
-ZSH_THEME="dracula"
+# fzf
+source <(fzf --zsh)
 
-zstyle ':omz:plugins:nvm' lazy yes
+# Plugins
+zplug 'dracula/zsh', as:theme
+zplug zsh-users/zsh-autosuggestions
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting fzf nvm)
+zplug check || zplug install
+zplug load
 
-source $ZSH/oh-my-zsh.sh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Aliases
+alias dcr="docker compose run --rm"
 
 ~/.dotfiles/check_for_update
-
-alias dcr="docker compose run --rm"
-export PATH="$PATH:$HOME/.dotnet/tools"
-
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
 
 [ -f ~/.zshrc.work ] && source ~/.zshrc.work

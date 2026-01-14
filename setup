@@ -83,74 +83,9 @@ function install_aur_packages() {
     cat ~/.dotfiles/aur_packages | xargs yay -S --noconfirm --answerdiff=None --answeredit=None
 }
 
-function install_dracula_themes() {
-    repo=https://github.com/dracula
-    dir=~/dracula-themes
-    themes="alacritty gtk rofi zsh waybar"
-
-    echo -e "🧛 ${purple}Installing dracula themes...${reset}"
-
-    for theme in $themes
-    do
-        [ -d $dir/$theme ] && echo -e "${green}   $dir/$theme already exists... skipping.${reset}" && continue
-
-        git clone $repo/$theme $dir/$theme
-
-    done
-
-    ln -s -f ~/dracula-themes/gtk ~/.themes/Dracula
-}
-
-function install_ohmyzsh() {
-    dir=~/.oh-my-zsh
-
-    echo -e "💻 ${purple}Installing ohmyzsh...${reset}"
-    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return
-
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc
-
-    ln -s -f ~/dracula-themes/zsh/dracula.zsh-theme ~/.oh-my-zsh/themes/dracula.zsh-theme
-
-    rm ~/.zshrc # remove this as we setup our own via stow
-}
-
-function install_ohmyzsh_plugins() {
-    repo=https://github.com/zsh-users
-    dir=~/.oh-my-zsh/custom/plugins
-    plugins="zsh-autosuggestions zsh-syntax-highlighting"
-
-    echo -e "💻 ${purple}Installing dracula ohmyzsh plugins...${reset}"
-
-    for plugin in $plugins
-    do
-        [ -d $dir/$plugin ] && echo -e "${green} $dir/$plugin already exists... skipping.${reset}" && continue
-        git clone $repo/$plugin $dir/$plugin
-    done
-}
-
-function install_tmux_plugin_manager() {
-    repo=https://github.com/tmux-plugins/tpm
-    dir=~/.tmux/plugins/tpm
-
-    echo -e "💻 ${purple}Installing tmux plugin manager...${reset}"
-    [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return
-
-    git clone $repo $dir
-}
-
 function stow_dotfiles() {
     echo -e "📁 ${purple}Running stow on dotfiles...${reset}"
     stow -R -d ~/.dotfiles -t ~/ files
-}
-
-function configure_ly() {
-    echo -e "📁 ${purple}Copying ly config...${reset}"
-    sudo cp -f ~/.dotfiles/ly/config.ini /etc/ly/config.ini
-}
-
-function enable_services() {
-    echo -e "🤝 ${purple}Enabling ly service...${reset}"
-    systemctl enable ly
 }
 
 function show_commit_summary() {
@@ -175,7 +110,5 @@ install_ohmyzsh
 install_ohmyzsh_plugins
 install_tmux_plugin_manager
 stow_dotfiles
-configure_ly
-enable_services
 show_commit_summary
 

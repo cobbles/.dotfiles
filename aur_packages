@@ -1,10 +1,14 @@
+git
+base-devel
 firefox
 stow
 docker
 docker-compose
 tmux
+tmux-plugin-manager
 fzf
 zsh
+zplug
 xdg-desktop-portal-wlr
 bluez
 bluez-utils
@@ -14,7 +18,7 @@ pavucontrol
 ttf-font-awesome
 otf-firamono-nerd
 otf-droid-nerd
-greetd-gtkgreet
 neovim
 cmake
-ly
+swaylock-effects
+
