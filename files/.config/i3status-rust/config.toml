@@ -1,0 +1,57 @@
+icons_format = "{icon}"
+
+[theme]
+theme = "dracula"
+[theme.overrides]
+separator = ""
+separator_bg = "auto"
+separator_fg = "#f8f8f2"
+
+[icons]
+icons = "material-nf"
+[icons.overrides]
+cpu = [""]
+memory_mem = ""
+backlight= ["󰖨"]
+
+[[block]]
+block = "time"
+interval = 1
+format = " $timestamp.datetime(f:'%Y-%m-%d %I:%M %p') "
+
+[[block]]
+block = "sound"
+format = " \\| $icon {$volume.eng(w:2) |}"
+
+[[block]]
+block = "backlight"
+format = "\\| $icon $brightness "
+
+[[block]]
+block = "bluetooth"
+mac = ".." # Optional: specific device mac A8:F5:E1:C9:0B:31
+format = " \\| $icon "
+disconnected_format = "\\| $icon{ $name|}"
+[[block.click]]
+button = "left"
+cmd = "blueman-manager" # Or "gnome-control-center bluetooth"
+
+[[block]]
+block = "net"
+format = " \\| $icon "
+
+[[block]]
+block = "cpu"
+format = "\\| $icon $utilization "
+
+[[block]]
+block = "memory"
+format = "\\| $icon $mem_used.eng(prefix:Mi)/$mem_total.eng(prefix:Mi) "
+
+[[block]]
+block = "battery"
+interval = 10
+format = " $icon $percentage "
+[block.theme_overrides]
+idle_bg = "#6272A4"
+good_fg = "#44475A"

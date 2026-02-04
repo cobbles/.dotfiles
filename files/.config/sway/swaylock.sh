@@ -1,1 +1,15 @@
-
+swaylock \
+  --color 282a36 \
+  --clock \
+  --indicator \
+  --indicator-radius 100 \
+  --indicator-thickness 7 \
+  --ring-color 6272a4 \
+  --key-hl-color ff79c6 \
+  --text-color f8f8f2 \
+  --line-color 00000000 \
+  --inside-color 282a36 \
+  --separator-color 00000000 \
+  --datestr "%Y-%m-%d" \
+  --timestr "%I:%M %p" \
+  --fade-in 0.2
