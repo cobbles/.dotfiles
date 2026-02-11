@@ -12,7 +12,7 @@ icons = "material-nf"
 [icons.overrides]
 cpu = [""]
 memory_mem = ""
-backlight= ["󰖨"]
+backlight = ["󰖨"]
 
 [[block]]
 block = "time"
@@ -29,7 +29,7 @@ format = "\\| $icon $brightness "
 
 [[block]]
 block = "bluetooth"
-mac = ".." # Optional: specific device mac A8:F5:E1:C9:0B:31
+mac = ".."                                 # Optional: specific device mac A8:F5:E1:C9:0B:31
 format = " \\| $icon "
 disconnected_format = "\\| $icon{ $name|}"
 [[block.click]]
