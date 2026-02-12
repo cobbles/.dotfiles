@@ -99,11 +99,17 @@ function show_commit_summary() {
     fi
 }
 
+function post_install() {
+    chsh -s /bin/zsh
+    zplug install
+}
+
 show_banner
 pull_latest
 generate_ssh_key
 install_yay
 install_aur_packages
 stow_dotfiles
+post_install
 show_commit_summary
 
