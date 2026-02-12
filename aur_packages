@@ -23,3 +23,5 @@ cmake
 swaylock-effects
 i3status-rust
 zplug
+alacritty
+rofi
