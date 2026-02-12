@@ -26,6 +26,7 @@ format = " \\| $icon {$volume.eng(w:2) |}"
 [[block]]
 block = "backlight"
 format = "\\| $icon $brightness "
+missing_format = ""
 
 [[block]]
 block = "bluetooth"

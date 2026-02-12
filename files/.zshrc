@@ -1,4 +1,5 @@
 source /usr/share/zsh/scripts/zplug/init.zsh
+source /usr/share/nvm/init-nvm.sh
 
 export PATH=~/.local/bin:$PATH:$GOPATH
 export HISTFILE=~/.zsh_history
