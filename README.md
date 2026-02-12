@@ -13,7 +13,7 @@ archinstall --config https://raw.githubusercontent.com/cobbles/.dotfiles/main/ar
 3. Run post install setup script
 
 ```
-sudo -u tom
+sudo tom
 cd ~/
 git clone https://github.com/cobbles/.dotfiles.git
 cd .dotfiles
