@@ -70,7 +70,7 @@ function install_yay() {
     echo -e "📦 ${purple}Installing yay...${reset}"
     [ -d $dir ] && echo -e "${green}   $dir already exists... skipping.${reset}" && return
 
-    pacman -S --needed git base-devel
+    sudo pacman -S --needed git base-devel
     git clone https://aur.archlinux.org/yay-bin.git $dir
     cd $dir
     makepkg -si
