@@ -104,11 +104,6 @@ pull_latest
 generate_ssh_key
 install_yay
 install_aur_packages
-install_dracula_themes
-install_gdm_dracula_theme
-install_ohmyzsh
-install_ohmyzsh_plugins
-install_tmux_plugin_manager
 stow_dotfiles
 show_commit_summary
 
