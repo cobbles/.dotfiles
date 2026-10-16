@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+dotfiles=$(cd "$(dirname "$(readlink -f "$0")")/../../../.." && pwd)
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
     items+=`find ~/personal ~/work -maxdepth 1 -mindepth 1 -type d 2>/dev/null`
-    items+=`echo -e "\n$HOME/.dotfiles"`
-    selected=`echo "$items" | fzf`
+    items+=`echo -e "\n$dotfiles"`
+    selected=`echo "$items" | sort -u | fzf`
 fi
 
 if [[ -z $selected ]]; then

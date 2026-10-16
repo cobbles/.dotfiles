@@ -19,3 +19,4 @@ ln -sf "$dotfiles/wsl/plugins.zsh" ~/.config/zsh/plugins.zsh
 ln -sf "$dotfiles/wsl/plugins.conf" ~/.config/tmux/plugins.conf
 
 sudo chsh -s /usr/bin/zsh "$USER"
+echo "✅ dotfiles installed. Open a new terminal to start zsh."

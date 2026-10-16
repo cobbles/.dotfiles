@@ -1,7 +1,7 @@
 # Sway desktop apps and their configs.
-{ config, pkgs, ... }:
+{ config, pkgs, dotfiles, ... }:
 let
-  link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/home/${path}";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/${path}";
 in
 {
   home.packages = with pkgs; [

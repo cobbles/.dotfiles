@@ -4,11 +4,12 @@
   lib,
   pkgs,
   inputs,
+  dotfiles,
   ...
 }:
 let
   # live symlinks into the checkout, so edits apply without a rebuild
-  link = path: config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/home/${path}";
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/${path}";
   bin = builtins.attrNames (builtins.readDir ../home/bin/.local/bin);
 in
 {
@@ -37,6 +38,17 @@ in
   // lib.genAttrs (map (name: ".local/bin/${name}") bin) (
     path: { source = link "bin/${path}"; }
   );
+
+  # point ${dotfiles} at wherever the repo is cloned
+  home.activation.dotfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    for dir in "$HOME/personal/.dotfiles" "$HOME/.dotfiles"; do
+      if [ -d "$dir/home" ]; then
+        run mkdir -p "$(dirname ${dotfiles})"
+        run ln -sfn "$dir" ${dotfiles}
+        break
+      fi
+    done
+  '';
 
   xdg.configFile = {
     "nvim".source = link "nvim/.config/nvim";

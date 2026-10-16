@@ -1,0 +1,15 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+  wsl:
+    runs-on: ubuntu-latest
+    container: ubuntu:26.04
+    env:
+      USER: root
+    steps:
+      - run: apt-get update && apt-get install -y sudo git bats
+      - uses: actions/checkout@v5
+      - run: wsl/install
+      - run: bats tests/smoke.bats

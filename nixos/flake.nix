@@ -16,7 +16,7 @@
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
     {
-      # sudo nixos-rebuild switch --flake ~/.dotfiles/nixos
+      # sudo nixos-rebuild switch --flake ~/personal/.dotfiles/nixos  (or ~/.dotfiles/nixos)
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [

@@ -9,13 +9,13 @@ Configs for zsh, tmux, neovim and a sway desktop. They are plain files under `ho
 
 ## Setup
 
-The repo must be cloned to `~/.dotfiles`.
+Clone the repo to `~/personal/.dotfiles` or `~/.dotfiles`. On WSL any path works.
 
 ### Ubuntu on WSL
 
 ```
-git clone https://github.com/cobbles/.dotfiles.git ~/.dotfiles
-~/.dotfiles/wsl/install
+git clone https://github.com/cobbles/.dotfiles.git ~/personal/.dotfiles
+~/personal/.dotfiles/wsl/install
 ```
 
 It's safe to re-run, and `dotfiles-switch` runs it after every update.
@@ -25,9 +25,9 @@ Install the DroidSansM Nerd Font on Windows and select it in Windows Terminal.
 ### NixOS
 
 ```
-git clone https://github.com/cobbles/.dotfiles.git ~/.dotfiles
-nixos-generate-config --show-hardware-config > ~/.dotfiles/nixos/hardware-configuration.nix
-sudo nixos-rebuild switch --flake ~/.dotfiles/nixos#laptop
+git clone https://github.com/cobbles/.dotfiles.git ~/personal/.dotfiles
+nixos-generate-config --show-hardware-config > ~/personal/.dotfiles/nixos/hardware-configuration.nix
+sudo nixos-rebuild switch --flake ~/personal/.dotfiles/nixos#laptop
 ```
 
 ## Making changes
@@ -59,6 +59,4 @@ Commit messages need to follow the [Conventional Commits]|(https://www.conventio
 
 ### Tests
 
-CI (`.github/workflows/ci.yml`) runs two jobs:
-- `wsl/install` on Ubuntu 26.04, run twice, each followed by `tests/smoke.sh --plugins`;
-- `nix flake check ./nixos`, which evaluates the NixOS config.
+After setting up a machine, run `bats tests/smoke.bats` (`sudo apt-get install bats` on WSL).

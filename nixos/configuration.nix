@@ -60,7 +60,10 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {
+      inherit inputs;
+      dotfiles = "/home/tom/.local/state/dotfiles"; # points at the checkout, see core.nix
+    };
     users.tom.imports = [
       ./core.nix
       ./desktop.nix
