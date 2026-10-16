@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Offer to update the dotfiles when the remote has new commits.
+dotfiles=$(cd "$(dirname "$(readlink -f "$0")")/../../../.." && pwd)
+
+behind=$(git -C "$dotfiles" rev-list --count HEAD..@{u} 2>/dev/null)
+if [[ ${behind:-0} -gt 0 && -t 0 ]]; then
+    read -r -p "[.dotfiles] $behind new commit(s). Would you like to update? [Y/n] " option
+    case "$option" in
+      "" | [yY]*) git -C "$dotfiles" pull --ff-only && dotfiles-switch ;;
+    esac
+fi
+
+# fetch in the background so the next shell knows about updates
+(git -C "$dotfiles" fetch -q &) >/dev/null 2>&1

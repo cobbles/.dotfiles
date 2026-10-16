@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Set up Ubuntu on WSL: apt tools, zsh/tmux plugins, config links. Safe to re-run.
+set -e
+dotfiles=$(cd "$(dirname "$0")/.." && pwd)
+
+sudo apt-get update
+sudo apt-get install -y git curl unzip build-essential stow zsh tmux neovim fzf ripgrep \
+    zsh-autosuggestions zsh-syntax-highlighting wl-clipboard
+
+# dracula themes aren't packaged by apt
+plugins=~/.local/share/dotfiles-plugins
+[[ -d $plugins/dracula-zsh ]] || git clone --depth 1 https://github.com/dracula/zsh.git $plugins/dracula-zsh
+[[ -d $plugins/dracula-tmux ]] || git clone --depth 1 https://github.com/dracula/tmux.git $plugins/dracula-tmux
+
+# create shared dirs first so stow links what's inside them, not the dirs themselves
+mkdir -p ~/.config/zsh ~/.config/tmux ~/.local/bin ~/.local/share
+stow -d "$dotfiles/home" -t ~ -R zsh tmux nvim bin opencode
+ln -sf "$dotfiles/wsl/plugins.zsh" ~/.config/zsh/plugins.zsh
+ln -sf "$dotfiles/wsl/plugins.conf" ~/.config/tmux/plugins.conf
+
+sudo chsh -s /usr/bin/zsh "$USER"

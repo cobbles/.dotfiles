@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Apply the dotfiles: nixos-rebuild on NixOS, stow elsewhere.
+set -e
+dotfiles=$(cd "$(dirname "$(readlink -f "$0")")/../../../.." && pwd)
+
+if [[ -e /etc/NIXOS ]]; then
+    sudo nixos-rebuild switch --flake "$dotfiles/nixos"
+else
+    "$dotfiles/wsl/install"
+fi
