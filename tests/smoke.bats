@@ -43,3 +43,13 @@
     [ ! -L ~/.local ]
     [ ! -L ~/.local/bin ]
 }
+
+@test "t offers ~/work itself as a session option" {
+    mkdir -p "$BATS_TEST_TMPDIR/home/personal" "$BATS_TEST_TMPDIR/home/work/project" "$BATS_TEST_TMPDIR/bin"
+    printf '#!/bin/sh\ncat > "%s"\n' "$BATS_TEST_TMPDIR/choices" > "$BATS_TEST_TMPDIR/bin/fzf"
+    chmod +x "$BATS_TEST_TMPDIR/bin/fzf"
+    HOME="$BATS_TEST_TMPDIR/home" PATH="$BATS_TEST_TMPDIR/bin:$PATH" run ~/.local/bin/t
+    [ "$status" -eq 0 ]
+    grep -qx "$BATS_TEST_TMPDIR/home/work" "$BATS_TEST_TMPDIR/choices"
+    grep -qx "$BATS_TEST_TMPDIR/home/work/project" "$BATS_TEST_TMPDIR/choices"
+}
