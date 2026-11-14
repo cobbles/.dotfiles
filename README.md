@@ -32,126 +32,44 @@ Everything in Part 1 runs as root.
 Ethernet or phone USB tethering works without setup. For Wi-Fi:
 
 ```
-systemctl start wpa_supplicant
+nmtui
 ```
 
-```
-wpa_cli
-```
-
-Inside `wpa_cli`, type these one at a time. Use your Wi-Fi name and password, and keep the quotes:
-
-```
-add_network
-set_network 0 ssid "WIFI NAME"
-set_network 0 psk "WIFI PASSWORD"
-enable_network 0
-quit
-```
-
-Check it works:
+Choose **Activate a connection**, pick your network and enter the password. Check it works:
 
 ```
 ping -c 3 nixos.org
 ```
 
-**3. Find the disk**
+**3. Download the setup script**
+
+```
+curl -LO https://raw.githubusercontent.com/cobbles/.dotfiles/main/nixos/partition
+```
+
+**4. Find the disk**
 
 ```
 lsblk
 ```
 
-Find the laptop's internal drive by its size. It's usually `nvme0n1` or `sda`. Save it, using your drive's name:
+Find the laptop's internal drive by its size. It's usually `nvme0n1` or `sda`.
+
+**5. Run the script**
+
+Use your drive's name:
 
 ```
-DISK=/dev/nvme0n1
+bash partition /dev/nvme0n1
 ```
 
-⚠️ The next step **erases the whole disk**.
+It asks you to type `yes`, because it **erases the whole disk**. Then it:
 
-**4. Partition the disk**
+- makes a 1 GB boot partition and uses the rest for NixOS
+- formats and mounts them at `/mnt`
+- writes a small base config with your user, Wi-Fi, git and flakes
 
-This makes a 1 GB boot partition and uses the rest for NixOS:
-
-```
-parted $DISK -- mklabel gpt
-```
-
-```
-parted $DISK -- mkpart boot fat32 1MB 1GB
-```
-
-```
-parted $DISK -- set 1 esp on
-```
-
-```
-parted $DISK -- mkpart nixos ext4 1GB 100%
-```
-
-**5. Format the partitions**
-
-```
-mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/boot
-```
-
-```
-mkfs.ext4 -L nixos /dev/disk/by-partlabel/nixos
-```
-
-**6. Mount them**
-
-```
-mount /dev/disk/by-label/nixos /mnt
-```
-
-```
-mkdir -p /mnt/boot
-```
-
-```
-mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
-```
-
-**7. Generate the hardware config**
-
-```
-nixos-generate-config --root /mnt
-```
-
-**8. Write a small base config**
-
-Delete the generated config and write a new one:
-
-```
-rm /mnt/etc/nixos/configuration.nix
-```
-
-```
-nano /mnt/etc/nixos/configuration.nix
-```
-
-Type this in exactly:
-
-```nix
-{ pkgs, ... }: {
-  imports = [ ./hardware-configuration.nix ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  networking.networkmanager.enable = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  users.users.tom = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
-  };
-  environment.systemPackages = [ pkgs.git ];
-  system.stateVersion = "26.05";
-}
-```
-
-Save with `Ctrl+O`, `Enter`, then quit with `Ctrl+X`.
-
-**9. Install**
+**6. Install**
 
 ```
 nixos-install
@@ -159,13 +77,13 @@ nixos-install
 
 When it finishes, it asks for a **root password**.
 
-**10. Set your user's password**
+**7. Set your user's password**
 
 ```
 nixos-enter --root /mnt -c 'passwd tom'
 ```
 
-**11. Reboot**
+**8. Reboot**
 
 ```
 reboot
