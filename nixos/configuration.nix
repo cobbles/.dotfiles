@@ -1,12 +1,9 @@
-# NixOS laptop: full sway desktop.
+# Shared by every machine: full sway desktop. Per-machine bits live in hosts/<name>/.
 { pkgs, inputs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
-
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "laptop";
   networking.networkmanager.enable = true;
 
   nix.settings.experimental-features = [
@@ -34,6 +31,7 @@
       swayidle
     ];
   };
+  services.displayManager.ly.enable = true;
   security.pam.services.gtklock = { };
   xdg.portal.wlr.enable = true;
 

@@ -1,5 +1,5 @@
-# Placeholder: replace with the output of `nixos-generate-config --show-hardware-config`
-# on the real machine.
+# Placeholder: nixos/install replaces this with the real one when installing
+# this machine. Commit it afterwards.
 {
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
