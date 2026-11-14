@@ -89,8 +89,9 @@ installed() {
 udevadm settle
 mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/boot
 mkfs.ext4 -F -L nixos /dev/disk/by-partlabel/nixos
-mount /dev/disk/by-label/nixos $MNT
-mount -o umask=077 /dev/disk/by-label/boot $MNT/boot
+udevadm settle
+mount /dev/disk/by-partlabel/nixos $MNT
+mount -o umask=077 /dev/disk/by-partlabel/boot $MNT/boot
 nixos-generate-config --root $MNT
 nixos-install --root $MNT --flake $MNT/home/tom/personal/.dotfiles/nixos#laptop --no-root-passwd
 nixos-enter --root $MNT -c chown -R tom:users /home/tom
