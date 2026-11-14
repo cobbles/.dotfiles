@@ -13,3 +13,4 @@ jobs:
       - uses: actions/checkout@v5
       - run: wsl/install
       - run: bats tests/smoke.bats
+      - run: bats tests/partition.bats
