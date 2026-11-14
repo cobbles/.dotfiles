@@ -29,7 +29,15 @@ nmtui
 
 Choose **Activate a connection**, pick your network and enter the password.
 
-**3. Run the installer**
+**3. Find the disk**
+
+```
+lsblk -d -o NAME,SIZE,MODEL
+```
+
+Pick the internal drive by its size and model, usually `nvme0n1` or `sda`. Ignore the USB stick you booted from. Note the name for the next step.
+
+**4. Run the installer**
 
 ```
 curl -fsSL https://raw.githubusercontent.com/cobbles/.dotfiles/main/nixos/install | sudo bash
@@ -38,12 +46,12 @@ curl -fsSL https://raw.githubusercontent.com/cobbles/.dotfiles/main/nixos/instal
 It asks:
 
 - **which machine**: `laptop` or `desktop`
-- **which disk**: find the internal drive by its size, usually `nvme0n1`
+- **which disk**: the name from step 3, e.g. `nvme0n1`
 - to type `yes`, because it **erases the whole disk**
 
 Then it installs, which takes a while, and asks you to set a password for `tom`.
 
-**4. Reboot**
+**5. Reboot**
 
 ```
 reboot
@@ -51,7 +59,7 @@ reboot
 
 Remove the USB stick when the screen goes blank.
 
-**5. Log in**
+**6. Log in**
 
 ly shows a login screen. Pick **sway**, then log in as `tom`.
 
