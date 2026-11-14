@@ -3,8 +3,10 @@ return {
     opts = {
       ensure_installed = {
         'lua',
+        'yaml',
+        'helm',
       },
-      auto_intsall = true,
+      auto_install = true,
       highlight = { enable = true },
       indent = { enable = true },
       additional_vim_regex_highlighting = true,

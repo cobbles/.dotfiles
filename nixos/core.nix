@@ -29,6 +29,8 @@ in
     unzip
     curl
     lua-language-server
+    helm-ls
+    yaml-language-server
   ];
 
   home.file = {

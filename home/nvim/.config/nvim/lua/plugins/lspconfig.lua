@@ -38,11 +38,20 @@ return {
         require("cmp_nvim_lsp").default_capabilities())
 
     -- language server: prefer one already on PATH (e.g. from nix), Mason's binaries don't run on NixOS
+    -- helm_ls hands the yaml parts of chart templates to yamlls
+    local servers = {
+      lua_ls = 'lua-language-server',
+      helm_ls = 'helm_ls',
+      yamlls = 'yaml-language-server',
+    }
     local ensure_installed = {}
-    if vim.fn.executable('lua-language-server') == 1 then
-      vim.lsp.enable('lua_ls')
-    else
-      table.insert(ensure_installed, 'lua_ls')
+    for server, binary in pairs(servers) do
+      if vim.fn.executable(binary) == 1 then
+        vim.lsp.config(server, { capabilities = capabilities })
+        vim.lsp.enable(server)
+      else
+        table.insert(ensure_installed, server)
+      end
     end
     require("mason").setup()
     require("mason-lspconfig").setup({
