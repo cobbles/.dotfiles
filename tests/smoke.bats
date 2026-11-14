@@ -35,8 +35,10 @@
     mkdir -p "$chart/templates"
     touch "$chart/Chart.yaml"
     printf 'kind: {{ .Values.kind }}\n' > "$chart/templates/deploy.yaml"
-    run nvim --headless "$chart/templates/deploy.yaml" "+lua io.stdout:write(vim.bo.filetype)" +qa
-    [ "$output" = "helm" ]
+    # write to a file: on a fresh machine treesitter also prints parser downloads to stdout
+    filetype="$BATS_TEST_TMPDIR/filetype"
+    nvim --headless "$chart/templates/deploy.yaml" "+call writefile([&filetype], '$filetype')" +qa
+    [ "$(cat "$filetype")" = "helm" ]
 }
 
 @test "configs link into this checkout" {
