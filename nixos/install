@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+# Install NixOS with this repo's config, from the minimal ISO:
+#   curl -fsSL https://raw.githubusercontent.com/cobbles/.dotfiles/main/nixos/install | sudo bash
+# Asks which machine and disk, wipes the disk, installs, and sets tom's password.
+set -euo pipefail
+
+repo=${REPO:-https://github.com/cobbles/.dotfiles.git}
+mnt=${MNT:-/mnt}
+export NIX_CONFIG="experimental-features = nix-command flakes"
+
+# piped from curl, so stdin is this script: read answers from the keyboard
+exec 3< "${TTY_IN:-/dev/tty}"
+ask() {
+    local reply
+    read -r -u 3 -p "$1" reply
+    echo "$reply"
+}
+die() {
+    echo "$*" >&2
+    exit 1
+}
+
+[[ $(id -u) == 0 ]] || die "Run as root: curl -fsSL .../nixos/install | sudo bash"
+
+# the ISO may not have git
+git_() {
+    if command -v git > /dev/null; then git "$@"; else nix run nixpkgs#git -- "$@"; fi
+}
+
+# 1 GB EFI boot partition, the rest for NixOS, mounted at $mnt
+# (an encrypted layout for a work machine would go here)
+partition() {
+    local disk=$1
+    parted -s "$disk" -- mklabel gpt mkpart boot fat32 1MB 1GB set 1 esp on mkpart nixos ext4 1GB 100%
+    udevadm settle
+    mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/boot
+    mkfs.ext4 -F -L nixos /dev/disk/by-partlabel/nixos
+    mount /dev/disk/by-label/nixos "$mnt"
+    mkdir -p "$mnt/boot"
+    mount -o umask=077 /dev/disk/by-label/boot "$mnt/boot"
+}
+
+clone=$(mktemp -d)/.dotfiles
+git_ clone -q "$repo" "$clone"
+
+echo "Machines: $(ls "$clone/nixos/hosts" | tr '\n' ' ')"
+host=$(ask "Which machine is this? ")
+[[ -n $host && -d $clone/nixos/hosts/$host ]] || die "Unknown machine: $host"
+
+echo
+lsblk -d -o NAME,SIZE,MODEL
+disk=$(ask "Which disk? (e.g. nvme0n1) ")
+[[ $disk == /dev/* ]] || disk=/dev/$disk
+[[ $(lsblk -dno TYPE "$disk" 2> /dev/null) == disk ]] || die "$disk is not a disk"
+
+echo
+lsblk "$disk"
+[[ $(ask "⚠️  Erase EVERYTHING on $disk? Type yes: ") == yes ]] || die "Aborted, nothing changed."
+
+partition "$disk"
+
+nixos-generate-config --root "$mnt"
+cp "$mnt/etc/nixos/hardware-configuration.nix" "$clone/nixos/hosts/$host/"
+
+dotfiles=$mnt/home/tom/personal/.dotfiles
+mkdir -p "$(dirname "$dotfiles")"
+mv "$clone" "$dotfiles"
+
+nixos-install --root "$mnt" --flake "$dotfiles/nixos#$host" --no-root-passwd
+nixos-enter --root "$mnt" -c 'chown -R tom:users /home/tom'
+
+echo
+echo "Set a password for tom:"
+until nixos-enter --root "$mnt" -c 'passwd tom' <&3; do :; done
+
+echo
+echo "✅ Installed $host. Remove the USB stick, then run: reboot"
