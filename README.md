@@ -4,28 +4,20 @@ Configs for zsh, tmux, neovim and a sway desktop. They are plain files under `ho
 
 | Machine | OS | Gets | Tools from | Linked by |
 |---|---|---|---|---|
-| Laptop | NixOS | core + sway desktop | nix | [home-manager](https://github.com/nix-community/home-manager) |
+| Laptop / desktop | NixOS | core + sway desktop | nix | [home-manager](https://github.com/nix-community/home-manager) |
 | Windows | Ubuntu on WSL | core: zsh, tmux, neovim, CLI tools | apt | stow |
 
 ## New machine
 
 Follow one of the guides below, then [Finish up](#finish-up).
 
-### NixOS laptop
+### NixOS
 
-This uses the **minimal ISO**. First you install a tiny base system, then reboot and switch it to this repo's config.
+Uses the **minimal ISO**. One command wipes the disk and installs this repo's config.
 
-Before you start, in the BIOS: turn off **Secure Boot** and make sure it boots in **UEFI** mode.
+**1. Set up the BIOS**
 
-#### Part 1: install the base system (from the ISO)
-
-**1. Become root**
-
-```
-sudo -i
-```
-
-Everything in Part 1 runs as root.
+Turn off **Secure Boot** and make sure it boots in **UEFI** mode. Then boot the ISO.
 
 **2. Connect to the internet**
 
@@ -35,55 +27,23 @@ Ethernet or phone USB tethering works without setup. For Wi-Fi:
 nmtui
 ```
 
-Choose **Activate a connection**, pick your network and enter the password. Check it works:
+Choose **Activate a connection**, pick your network and enter the password.
+
+**3. Run the installer**
 
 ```
-ping -c 3 nixos.org
+curl -fsSL https://raw.githubusercontent.com/cobbles/.dotfiles/main/nixos/install | sudo bash
 ```
 
-**3. Download the setup script**
+It asks:
 
-```
-curl -LO https://raw.githubusercontent.com/cobbles/.dotfiles/main/nixos/partition
-```
+- **which machine**: `laptop` or `desktop`
+- **which disk**: find the internal drive by its size, usually `nvme0n1`
+- to type `yes`, because it **erases the whole disk**
 
-**4. Find the disk**
+Then it installs, which takes a while, and asks you to set a password for `tom`.
 
-```
-lsblk
-```
-
-Find the laptop's internal drive by its size. It's usually `nvme0n1` or `sda`.
-
-**5. Run the script**
-
-Use your drive's name:
-
-```
-bash partition /dev/nvme0n1
-```
-
-It asks you to type `yes`, because it **erases the whole disk**. Then it:
-
-- makes a 1 GB boot partition and uses the rest for NixOS
-- formats and mounts them at `/mnt`
-- writes a small base config with your user, Wi-Fi, git and flakes
-
-**6. Install**
-
-```
-nixos-install
-```
-
-When it finishes, it asks for a **root password**.
-
-**7. Set your user's password**
-
-```
-nixos-enter --root /mnt -c 'passwd tom'
-```
-
-**8. Reboot**
+**4. Reboot**
 
 ```
 reboot
@@ -91,65 +51,11 @@ reboot
 
 Remove the USB stick when the screen goes blank.
 
-#### Part 2: switch to this repo's config
+**5. Log in**
 
-Log in as `tom` at the text console.
+ly shows a login screen. Pick **sway**, then log in as `tom`.
 
-**1. Connect to the internet**
-
-If you're on Wi-Fi:
-
-```
-nmtui
-```
-
-**2. Clone the repo**
-
-```
-git clone https://github.com/cobbles/.dotfiles.git ~/personal/.dotfiles
-```
-
-**3. Use this machine's hardware config**
-
-Copy it over the placeholder in the repo:
-
-```
-cp /etc/nixos/hardware-configuration.nix ~/personal/.dotfiles/nixos/
-```
-
-**4. Build the system**
-
-```
-sudo nixos-rebuild switch --flake ~/personal/.dotfiles/nixos#laptop
-```
-
-This takes a while. From now on, run `dotfiles-switch` to apply changes.
-
-**5. Reboot**
-
-```
-sudo reboot
-```
-
-**6. Start the desktop**
-
-Log in at the console, then:
-
-```
-sway
-```
-
-`Super+Enter` opens a terminal.
-
-**7. Commit the hardware config**
-
-```
-cd ~/personal/.dotfiles
-git add nixos/hardware-configuration.nix
-git commit -m "chore: add laptop hardware config"
-```
-
-Push it after setting up SSH in [Finish up](#finish-up).
+`Super+Enter` opens a terminal. Run `nmtui` again to connect to Wi-Fi.
 
 ### Ubuntu on WSL
 
@@ -189,7 +95,7 @@ You're now in zsh.
 
 ### Finish up
 
-**1. Set up SSH for GitHub**
+**1. Set up SSH for GitHub and GitLab**
 
 The repo was cloned over HTTPS, so you can't push yet.
 
@@ -197,29 +103,53 @@ The repo was cloned over HTTPS, so you can't push yet.
 ssh-keygen -t ed25519
 ```
 
-```
-cat ~/.ssh/id_ed25519.pub
-```
-
-Add the key at [github.com/settings/keys](https://github.com/settings/keys), then:
+Copy the public key to the clipboard:
 
 ```
-git -C ~/personal/.dotfiles remote set-url origin git@github.com:cobbles/.dotfiles.git
+clip-copy < ~/.ssh/id_ed25519.pub
 ```
+
+Paste it into both sites:
+
+- GitHub: [github.com/settings/keys](https://github.com/settings/keys)
+- GitLab: [gitlab.com/-/user_settings/ssh_keys](https://gitlab.com/-/user_settings/ssh_keys)
+
+Check they work:
 
 ```
 ssh -T git@github.com
 ```
 
-**2. Add per-machine settings**
+```
+ssh -T git@gitlab.com
+```
+
+Switch the repo to SSH:
+
+```
+git -C ~/personal/.dotfiles remote set-url origin git@github.com:cobbles/.dotfiles.git
+```
+
+**2. NixOS only: commit the hardware config**
+
+The installer wrote this machine's hardware config into the repo. Use `laptop` or `desktop`:
+
+```
+cd ~/personal/.dotfiles
+git add nixos/hosts/laptop/hardware-configuration.nix
+git commit -m "chore: add laptop hardware config"
+git push
+```
+
+**3. Add per-machine settings**
 
 Put work tokens and aliases in `~/.zshrc.work`. It's sourced if present and never committed.
 
-**3. Install neovim plugins**
+**4. Install neovim plugins**
 
 Run `nvim` once. It installs its plugins on first launch.
 
-**4. Check everything works**
+**5. Check everything works**
 
 On WSL, first run `sudo apt-get install bats`. On NixOS, use `nix-shell -p bats`.
 
@@ -233,6 +163,7 @@ cd ~/personal/.dotfiles && bats tests/smoke.bats
 - **Add a tool:** add it to the apt list in `wsl/install` and to `nixos/core.nix`. Desktop-only tools go in `nixos/desktop.nix`.
 - **Add a config:** add it under `home/<tool>/`, add the package to the `stow` line in `wsl/install`, and link it in the same nix file.
 - **Apply changes:** run `dotfiles-switch`. It runs `nixos-rebuild` on NixOS and `wsl/install` on WSL.
+- **Add a NixOS machine:** add `nixos/hosts/<name>/hardware-configuration.nix` (copy a placeholder) and add the name to the list in `nixos/flake.nix`. Machine-specific settings can go in that file.
 - **Per-machine settings** (work tokens, aliases): put them in `~/.zshrc.work`. It is sourced if present and never committed.
 
 The repo can live at `~/personal/.dotfiles` or `~/.dotfiles`. On WSL any path works.
@@ -258,3 +189,8 @@ Commit messages need to follow the [Conventional Commits](https://www.convention
 ### Tests
 
 After setting up a machine, run `bats tests/smoke.bats`. See [Finish up](#finish-up) for installing bats.
+
+CI also runs:
+
+- `tests/install.bats`: the NixOS installer, with the disk tools faked out
+- `tests/nixos.bats`: each NixOS machine's config builds (needs nix)
