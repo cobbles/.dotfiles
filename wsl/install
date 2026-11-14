@@ -13,8 +13,8 @@ plugins=~/.local/share/dotfiles-plugins
 [[ -d $plugins/dracula-tmux ]] || git clone --depth 1 https://github.com/dracula/tmux.git $plugins/dracula-tmux
 
 # create shared dirs first so stow links what's inside them, not the dirs themselves
-mkdir -p ~/.config/zsh ~/.config/tmux ~/.local/bin ~/.local/share
-stow -d "$dotfiles/home" -t ~ -R zsh tmux nvim bin opencode
+mkdir -p ~/.config/zsh ~/.config/tmux ~/.config/herdr ~/.local/bin ~/.local/share
+stow -d "$dotfiles/home" -t ~ -R zsh tmux nvim bin opencode herdr
 ln -sf "$dotfiles/wsl/plugins.zsh" ~/.config/zsh/plugins.zsh
 ln -sf "$dotfiles/wsl/plugins.conf" ~/.config/tmux/plugins.conf
 

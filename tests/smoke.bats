@@ -35,6 +35,7 @@
     [ "$(readlink -f ~/.zshrc)" = "$repo/home/zsh/.zshrc" ]
     [ "$(readlink -f ~/.tmux.conf)" = "$repo/home/tmux/.tmux.conf" ]
     [ "$(readlink -f ~/.config/nvim)" = "$repo/home/nvim/.config/nvim" ]
+    [ "$(readlink -f ~/.config/herdr/config.toml)" = "$repo/home/herdr/.config/herdr/config.toml" ]
     [ "$(readlink -f ~/.local/bin/t)" = "$repo/home/bin/.local/bin/t" ]
 }
 

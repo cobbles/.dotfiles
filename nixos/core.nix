@@ -53,6 +53,7 @@ in
   xdg.configFile = {
     "nvim".source = link "nvim/.config/nvim";
     "opencode".source = link "opencode/.config/opencode";
+    "herdr/config.toml".source = link "herdr/.config/herdr/config.toml";
 
     "zsh/plugins.zsh".text = ''
       source ${inputs.dracula-zsh}/dracula.zsh-theme
