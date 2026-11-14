@@ -25,3 +25,9 @@ config() {
     [ "$(nix eval "$flake#nixosConfigurations.laptop.config.services.displayManager.ly.enable")" = true ]
     [ "$(nix eval "$flake#nixosConfigurations.desktop.config.services.displayManager.ly.enable")" = true ]
 }
+
+@test "helm and yaml language servers are installed" {
+    packages=$(nix eval --json "$flake#nixosConfigurations.laptop.config.home-manager.users.tom.home.packages" --apply 'map (p: p.pname or p.name)')
+    [[ $packages == *'"helm-ls"'* ]]
+    [[ $packages == *'"yaml-language-server"'* ]]
+}

@@ -30,6 +30,15 @@
     [[ $output != *Error* ]]
 }
 
+@test "nvim detects helm chart templates" {
+    chart="$BATS_TEST_TMPDIR/chart"
+    mkdir -p "$chart/templates"
+    touch "$chart/Chart.yaml"
+    printf 'kind: {{ .Values.kind }}\n' > "$chart/templates/deploy.yaml"
+    run nvim --headless "$chart/templates/deploy.yaml" "+lua io.stdout:write(vim.bo.filetype)" +qa
+    [ "$output" = "helm" ]
+}
+
 @test "configs link into this checkout" {
     repo=$(cd "$BATS_TEST_DIRNAME/.." && pwd)
     [ "$(readlink -f ~/.zshrc)" = "$repo/home/zsh/.zshrc" ]
