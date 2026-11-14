@@ -13,17 +13,171 @@ Follow one of the guides below, then [Finish up](#finish-up).
 
 ### NixOS laptop
 
-**1. Install NixOS**
+This uses the **minimal ISO**. First you install a tiny base system, then reboot and switch it to this repo's config.
 
-Boot the NixOS ISO and run the installer.
+Before you start, in the BIOS: turn off **Secure Boot** and make sure it boots in **UEFI** mode.
 
-- Username: `tom` (the config expects it)
-- Desktop: **No desktop** (sway comes from this repo)
-- Boot: UEFI (the config uses systemd-boot)
+#### Part 1: install the base system (from the ISO)
 
-Reboot and log in at the text console.
+**1. Become root**
+
+```
+sudo -i
+```
+
+Everything in Part 1 runs as root.
 
 **2. Connect to the internet**
+
+Ethernet or phone USB tethering works without setup. For Wi-Fi:
+
+```
+systemctl start wpa_supplicant
+```
+
+```
+wpa_cli
+```
+
+Inside `wpa_cli`, type these one at a time. Use your Wi-Fi name and password, and keep the quotes:
+
+```
+add_network
+set_network 0 ssid "WIFI NAME"
+set_network 0 psk "WIFI PASSWORD"
+enable_network 0
+quit
+```
+
+Check it works:
+
+```
+ping -c 3 nixos.org
+```
+
+**3. Find the disk**
+
+```
+lsblk
+```
+
+Find the laptop's internal drive by its size. It's usually `nvme0n1` or `sda`. Save it, using your drive's name:
+
+```
+DISK=/dev/nvme0n1
+```
+
+⚠️ The next step **erases the whole disk**.
+
+**4. Partition the disk**
+
+This makes a 1 GB boot partition and uses the rest for NixOS:
+
+```
+parted $DISK -- mklabel gpt
+```
+
+```
+parted $DISK -- mkpart boot fat32 1MB 1GB
+```
+
+```
+parted $DISK -- set 1 esp on
+```
+
+```
+parted $DISK -- mkpart nixos ext4 1GB 100%
+```
+
+**5. Format the partitions**
+
+```
+mkfs.fat -F 32 -n boot /dev/disk/by-partlabel/boot
+```
+
+```
+mkfs.ext4 -L nixos /dev/disk/by-partlabel/nixos
+```
+
+**6. Mount them**
+
+```
+mount /dev/disk/by-label/nixos /mnt
+```
+
+```
+mkdir -p /mnt/boot
+```
+
+```
+mount -o umask=077 /dev/disk/by-label/boot /mnt/boot
+```
+
+**7. Generate the hardware config**
+
+```
+nixos-generate-config --root /mnt
+```
+
+**8. Write a small base config**
+
+Delete the generated config and write a new one:
+
+```
+rm /mnt/etc/nixos/configuration.nix
+```
+
+```
+nano /mnt/etc/nixos/configuration.nix
+```
+
+Type this in exactly:
+
+```nix
+{ pkgs, ... }: {
+  imports = [ ./hardware-configuration.nix ];
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  networking.networkmanager.enable = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  users.users.tom = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+  };
+  environment.systemPackages = [ pkgs.git ];
+  system.stateVersion = "26.05";
+}
+```
+
+Save with `Ctrl+O`, `Enter`, then quit with `Ctrl+X`.
+
+**9. Install**
+
+```
+nixos-install
+```
+
+When it finishes, it asks for a **root password**.
+
+**10. Set your user's password**
+
+```
+nixos-enter --root /mnt -c 'passwd tom'
+```
+
+**11. Reboot**
+
+```
+reboot
+```
+
+Remove the USB stick when the screen goes blank.
+
+#### Part 2: switch to this repo's config
+
+Log in as `tom` at the text console.
+
+**1. Connect to the internet**
 
 If you're on Wi-Fi:
 
@@ -31,43 +185,35 @@ If you're on Wi-Fi:
 nmtui
 ```
 
-**3. Get git for this session**
-
-```
-nix-shell -p git
-```
-
-**4. Clone the repo**
+**2. Clone the repo**
 
 ```
 git clone https://github.com/cobbles/.dotfiles.git ~/personal/.dotfiles
 ```
 
-**5. Use this machine's hardware config**
+**3. Use this machine's hardware config**
 
-The installer already generated it. Copy it over the placeholder:
+Copy it over the placeholder in the repo:
 
 ```
 cp /etc/nixos/hardware-configuration.nix ~/personal/.dotfiles/nixos/
 ```
 
-**6. Build the system**
-
-Flakes aren't on yet, so turn them on for this one command:
+**4. Build the system**
 
 ```
-sudo env NIX_CONFIG="experimental-features = nix-command flakes" nixos-rebuild switch --flake ~/personal/.dotfiles/nixos#laptop
+sudo nixos-rebuild switch --flake ~/personal/.dotfiles/nixos#laptop
 ```
 
-This takes a while. After this, run `dotfiles-switch` to apply changes.
+This takes a while. From now on, run `dotfiles-switch` to apply changes.
 
-**7. Reboot**
+**5. Reboot**
 
 ```
 sudo reboot
 ```
 
-**8. Start the desktop**
+**6. Start the desktop**
 
 Log in at the console, then:
 
@@ -77,7 +223,7 @@ sway
 
 `Super+Enter` opens a terminal.
 
-**9. Commit the hardware config**
+**7. Commit the hardware config**
 
 ```
 cd ~/personal/.dotfiles
