@@ -22,6 +22,7 @@ in
     tmux
     herdr
     mise
+    jq
     neovim
     fzf
     ripgrep
