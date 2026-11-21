@@ -4,6 +4,7 @@
   nixpkgs.config.allowUnfree = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  time.timeZone = "Australia/Melbourne";
 
   networking.networkmanager.enable = true;
 
