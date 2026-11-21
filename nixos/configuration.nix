@@ -1,6 +1,7 @@
 # Shared by every machine: full sway desktop. Per-machine bits live in hosts/<name>/.
 { pkgs, inputs, ... }:
 {
+  nixpkgs.config.allowUnfree = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 

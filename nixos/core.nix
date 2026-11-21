@@ -31,6 +31,8 @@ in
     lua-language-server
     helm-ls
     yaml-language-server
+    claude-code
+    google-chrome
   ];
 
   home.file = {
