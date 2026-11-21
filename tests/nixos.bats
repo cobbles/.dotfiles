@@ -60,3 +60,8 @@ config() {
     [[ $packages == *'"mise"'* ]]
     grep -q 'mise activate zsh' "$BATS_TEST_DIRNAME/../home/zsh/.zshrc"
 }
+
+@test "jq is installed" {
+    packages=$(nix eval --json "$flake#nixosConfigurations.laptop.config.home-manager.users.tom.home.packages" --apply 'map (p: p.pname or p.name)')
+    [[ $packages == *'"jq"'* ]]
+}
