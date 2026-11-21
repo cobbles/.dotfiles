@@ -21,6 +21,7 @@ in
     gh
     tmux
     herdr
+    mise
     neovim
     fzf
     ripgrep

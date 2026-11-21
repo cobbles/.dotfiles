@@ -7,6 +7,9 @@ export SAVEHIST=10000
 # fzf
 (( $+commands[fzf] )) && source <(fzf --zsh 2>/dev/null)
 
+# mise
+(( $+commands[mise] )) && eval "$(mise activate zsh)"
+
 # Plugins (see wsl/plugins.zsh, nixos/core.nix)
 [[ -r ~/.config/zsh/plugins.zsh ]] && source ~/.config/zsh/plugins.zsh
 
