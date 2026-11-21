@@ -7,6 +7,7 @@
   time.timeZone = "Australia/Melbourne";
 
   networking.networkmanager.enable = true;
+  services.tailscale.enable = true; # first time: sudo tailscale up
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -60,6 +61,9 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    # apps like herdr write their own config before we link ours; move theirs aside instead of failing
+    backupFileExtension = "hm-bak";
+    overwriteBackup = true;
     extraSpecialArgs = {
       inherit inputs;
       dotfiles = "/home/tom/.local/state/dotfiles"; # points at the checkout, see core.nix
