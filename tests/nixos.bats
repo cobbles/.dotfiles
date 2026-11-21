@@ -48,3 +48,9 @@ config() {
     [ "$(config laptop home-manager.users.tom.programs.git.settings.user.name)" = "Tom Molloy" ]
     [ "$(config laptop home-manager.users.tom.programs.git.settings.user.email)" = cobbles@molloy.cloud ]
 }
+
+@test "herdr sessions can be reached from other machines over tailscale ssh" {
+    packages=$(nix eval --json "$flake#nixosConfigurations.laptop.config.home-manager.users.tom.home.packages" --apply 'map (p: p.pname or p.name)')
+    [[ $packages == *'"herdr"'* ]]
+    [[ $(nix eval --json "$flake#nixosConfigurations.desktop.config.services.tailscale.extraSetFlags") == *'"--ssh"'* ]]
+}
