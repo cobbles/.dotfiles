@@ -7,7 +7,10 @@
   time.timeZone = "Australia/Melbourne";
 
   networking.networkmanager.enable = true;
-  services.tailscale.enable = true; # first time: sudo tailscale up
+  services.tailscale = {
+    enable = true; # first time: sudo tailscale up
+    extraSetFlags = [ "--ssh" ]; # ssh in from the tailnet, e.g. herdr --remote tom@desktop
+  };
 
   nix.settings.experimental-features = [
     "nix-command"

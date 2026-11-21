@@ -20,6 +20,7 @@ in
   home.packages = with pkgs; [
     gh
     tmux
+    herdr
     neovim
     fzf
     ripgrep
