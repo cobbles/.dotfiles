@@ -54,3 +54,9 @@ config() {
     [[ $packages == *'"herdr"'* ]]
     [[ $(nix eval --json "$flake#nixosConfigurations.desktop.config.services.tailscale.extraSetFlags") == *'"--ssh"'* ]]
 }
+
+@test "mise is installed and activated in zsh" {
+    packages=$(nix eval --json "$flake#nixosConfigurations.laptop.config.home-manager.users.tom.home.packages" --apply 'map (p: p.pname or p.name)')
+    [[ $packages == *'"mise"'* ]]
+    grep -q 'mise activate zsh' "$BATS_TEST_DIRNAME/../home/zsh/.zshrc"
+}
