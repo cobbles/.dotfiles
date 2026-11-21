@@ -18,7 +18,7 @@ in
   home.stateVersion = "26.05";
 
   home.packages = with pkgs; [
-    git
+    gh
     tmux
     neovim
     fzf
@@ -34,6 +34,14 @@ in
     claude-code
     google-chrome
   ];
+
+  programs.git = {
+    enable = true;
+    settings.user = {
+      name = "Tom Molloy";
+      email = "cobbles@molloy.cloud";
+    };
+  };
 
   home.file = {
     ".zshrc".source = link "zsh/.zshrc";
