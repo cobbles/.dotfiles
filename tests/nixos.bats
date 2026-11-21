@@ -41,3 +41,10 @@ config() {
     [ "$(config desktop home-manager.backupFileExtension)" = hm-bak ]
     [ "$(nix eval "$flake#nixosConfigurations.desktop.config.home-manager.overwriteBackup")" = true ]
 }
+
+@test "gh is installed and git knows who is committing" {
+    packages=$(nix eval --json "$flake#nixosConfigurations.laptop.config.home-manager.users.tom.home.packages" --apply 'map (p: p.pname or p.name)')
+    [[ $packages == *'"gh"'* ]]
+    [ "$(config laptop home-manager.users.tom.programs.git.settings.user.name)" = "Tom Molloy" ]
+    [ "$(config laptop home-manager.users.tom.programs.git.settings.user.email)" = cobbles@molloy.cloud ]
+}
