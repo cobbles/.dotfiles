@@ -31,3 +31,13 @@ config() {
     [[ $packages == *'"helm-ls"'* ]]
     [[ $packages == *'"yaml-language-server"'* ]]
 }
+
+@test "tailscale is enabled" {
+    [ "$(nix eval "$flake#nixosConfigurations.laptop.config.services.tailscale.enable")" = true ]
+    [ "$(nix eval "$flake#nixosConfigurations.desktop.config.services.tailscale.enable")" = true ]
+}
+
+@test "home-manager backs up files it would clobber instead of failing" {
+    [ "$(config desktop home-manager.backupFileExtension)" = hm-bak ]
+    [ "$(nix eval "$flake#nixosConfigurations.desktop.config.home-manager.overwriteBackup")" = true ]
+}
